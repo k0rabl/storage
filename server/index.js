@@ -1,20 +1,17 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const config = require('config')
+import express from 'express'
+import mongoose from 'mongoose'
+import config from 'config'
 
 const app = express()
-const PORT = config.get('serverPort')
+const PORT = config.get('serverPort') || 5000
+const URI = config.get('dbConnect')
 
-const start = async () => {
-  try {
-    await mongoose.connect(config.get('dbConnect'))
-    
-    app.listen(PORT, () => {
-      console.log('Server start', PORT)
-    })
-  } catch (e) {
-    
-  }
-}
+//connect server
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`)
+})
 
-start()
+//connect mongo
+mongoose.connect(URI, {}, (err) =>
+  err ? console.log(err) : console.log('Connected to MongoDB')
+)
