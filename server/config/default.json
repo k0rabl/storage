@@ -1,0 +1,4 @@
+{
+  "serverPort": 5000,
+  "dbConnect": "mongodb+srv://korabl:i6kOrab1@mycloud.c6sev.mongodb.net/cloud"
+}

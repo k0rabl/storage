@@ -1,0 +1,27 @@
+{
+  "name": "my_cloud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/k0rabl/storage.git"
+  },
+  "author": "Danil Korabl <k0rab1@ya.ru>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/k0rabl/storage/issues"
+  },
+  "homepage": "https://github.com/k0rabl/storage#readme",
+  "dependencies": {
+    "config": "^3.3.6",
+    "express": "^4.17.2",
+    "mongoose": "^6.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
