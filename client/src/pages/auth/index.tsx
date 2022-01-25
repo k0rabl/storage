@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
-import { loginThunk } from '../../features/auth/authMidleware';
+import { loginThunk } from '../../features/auth/model/authMidleware';
 import { RootState } from '../../redux/store';
 
 interface IProps {

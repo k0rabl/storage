@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Header } from '../features/header';
 import { Routing } from '../pages';
 
-
+import './app.sass'
 
 const App:FunctionComponent<{}> = () => {
   return (
