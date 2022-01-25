@@ -1,4 +1,4 @@
-import { AnyAction, createSlice, PayloadAction, ThunkAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 
 export interface User {
@@ -11,10 +11,10 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    logIn:  (state, action: PayloadAction<Object>) =>{
+    logIn:  (state, action: PayloadAction<{token: string, data: object}>) =>{
       state.activeUser = action
 
-      // localStorage.setItem('token', action)
+      localStorage.setItem('token', action.payload.token)
     },
     logOut: () => {},
     registration: () => {}

@@ -2,19 +2,16 @@ import { AnyAction, ThunkAction } from '@reduxjs/toolkit'
 
 import { logIn } from './authSlice'
 
-import axios from 'axios'
+import { instance } from '../../configs/axios'
 import { RootState } from '../../redux/store'
 
-export const loginThunk = (email: string, password: string):  
-ThunkAction<void, RootState, unknown, AnyAction> => dispatch => {
-  axios.get('/api/auth/login',{ 
-    params: {
+export const loginThunk =   (email: string, password: string):  ThunkAction<void, RootState, unknown, AnyAction> => async dispatch => {
+  await instance.post('/auth/login',{ 
       email,
       password
-    }
   }).then(res => {
     console.log(res)
 
     dispatch(logIn(res.data))
-  })
+  }).catch(error => console.warn('Server error: ', error.response.data.msg))
 }
