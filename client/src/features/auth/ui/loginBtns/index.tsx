@@ -1,18 +1,47 @@
-import { FunctionComponent } from "react"
+import { FC, useEffect } from "react"
+import { connect, ConnectedProps } from "react-redux"
+import { useNavigate } from "react-router"
+import { RootState } from "../../../../redux/store"
 import { Button } from "../../../../shared/button"
+import { logOut } from "../../model/authSlice"
 
-interface IProps {}
+import './loginBtns.sass'
 
-export const LoginBtns:FunctionComponent<IProps> = () => {
-  const token = localStorage.getItem('token')
+const mapState = (state: RootState) => ({
+  activeUser: state.auth.activeUser
+})
 
+const mapDispatch = {
+  logOut
+}
+
+const connector = connect(mapState, mapDispatch)
+
+type IProps = ConnectedProps<typeof connector> 
+
+const LoginBtns:FC<IProps> = (props) => {
+
+  const {logOut, activeUser} = props
+  const nav = useNavigate()  
+
+  const handleOut = () => {
+    logOut()
+
+    nav('/auth/login')
+  }
+  
   return(
-    <div>
+    <div className="buttons">
       {
-        token 
-          ? <Button label="Sign Out" click={() => {}} classes={['btn-primary']}/>
-          : <Button label="Sign In" route='/auth/login' classes={['btn-primary']}/>
+        activeUser
+          ? <Button label="Sign Out" click={handleOut} classes={['btn-primary']}/>
+          : <div className="buttons__login">
+              <Button label="Sign In" route='/auth/login' classes={['btn-primary']}/>
+              <Button label="Sign Up" route='/auth/registration' classes={['btn-secondly']}/>
+            </div>
       } 
     </div>
   )
 }
+
+export default connector(LoginBtns)

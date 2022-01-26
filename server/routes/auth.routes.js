@@ -13,7 +13,7 @@ router.post(
   Registration
 )
 
-router.get(
+router.post(
   '/login', 
   Login
 )

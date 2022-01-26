@@ -1,5 +1,6 @@
-import { FunctionComponent, useState } from "react"
-import { connect } from "react-redux";
+import { FC, useEffect, useState } from "react"
+import { connect, ConnectedProps } from "react-redux";
+import { useNavigate } from "react-router";
 import { ThunkDispatch } from "redux-thunk";
 import { RootState } from "../../../../redux/store";
 import { Button } from "../../../../shared/button";
@@ -8,17 +9,30 @@ import { loginThunk } from "../../model/authMidleware";
 
 import './login.sass'
 
-interface IProps {
-  onLogin: (email: string, password: string) => void
-}
 
 interface IParams {
   email: string
   pass: string
 }
-const Login:FunctionComponent<IProps> = ({onLogin}) => {
-  const [params, setParams] = useState<IParams>({email: '', pass: ''})
 
+const mapProps = (dispatch: ThunkDispatch<RootState, {}, any>) => ({
+  onLogin: (email: string, password: string) => {    
+    dispatch(loginThunk(email, password))
+  }
+})
+
+const mapState = (state: RootState) => ({
+  activeUser: state.auth.activeUser
+})
+
+const connector = connect(mapState, mapProps)
+
+type IProps = ConnectedProps<typeof connector> 
+
+const Login:FC<IProps> = (props) => {
+  const [params, setParams] = useState<IParams>({email: '', pass: ''})
+  const navigate = useNavigate()
+  
   const getValues = (value: object) => {
     setParams({
       ...params,
@@ -27,9 +41,15 @@ const Login:FunctionComponent<IProps> = ({onLogin}) => {
   }
   
   const handleLogin = () => {
-    //'korabl123@yandex.ru', 'qwerty123*'
-    onLogin(params.email, params.pass)
+    //korabl123@yandex.ru
+    //qwerty123*
+    props.onLogin(params.email, params.pass)
   }
+
+  useEffect(() => {
+    if(props.activeUser)
+      navigate('/storage')
+  })
 
   return(
     <>
@@ -47,16 +67,4 @@ const Login:FunctionComponent<IProps> = ({onLogin}) => {
 }
 
 
-
-const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, {}, any>) => ({
-  onLogin: (email: string, password: string) => {
-    dispatch(loginThunk(email, password));
-  }
-});
-
-
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(Login);
+export default connector(Login);

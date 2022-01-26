@@ -14,7 +14,7 @@ export const Registration = async (req, res) => {
       return res.status(400).json({ msg: 'Incorrect req ', validErrors })
     }
 
-    const {email, password} = req.body
+    const {email, password}, name = req.body
 
     const user = await User.findOne({email})
 
@@ -24,6 +24,7 @@ export const Registration = async (req, res) => {
     const hashPass = await bcrypt.hash(password, 8)
     const newUser = new User({
       email,
+      name,
       password: hashPass
     })
 
@@ -40,9 +41,9 @@ export const Login = async (req, res) => {
   try {
     const {email, password} = req.body
     const user = await User.findOne({email})
-  
+    
     if (!user)
-      return res.status(400).json({ msg: 'User with this email not found.' })
+      return res.status(400).json({ msg: `${email} is not found.` })
   
     const isMatch = await bcrypt.compare(password, user.password)
   

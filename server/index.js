@@ -3,11 +3,15 @@ import mongoose from 'mongoose'
 import config from 'config'
 
 import authRouter from './routes/auth.routes.js'
+import { cors } from './middleware/cors.middleware.js'
 
 const app = express()
 const PORT = config.get('serverPort') || 5000
 const URI = config.get('dbConnect')
 
+
+//cors
+app.use(cors)
 
 app.use(express.json())
 

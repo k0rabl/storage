@@ -11,12 +11,16 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    logIn:  (state, action: PayloadAction<{token: string, data: object}>) =>{
-      state.activeUser = action
+    logIn:  (state, action: PayloadAction<{token: string, user: object}>) =>{      
+      state.activeUser = action.payload.user
 
       localStorage.setItem('token', action.payload.token)
     },
-    logOut: () => {},
+    logOut: (state) => {      
+      delete state.activeUser 
+      
+      localStorage.removeItem('token')
+    },
     registration: () => {}
   }
 })
