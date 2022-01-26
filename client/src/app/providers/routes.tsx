@@ -1,10 +1,18 @@
 import { Storage } from '../../pages/storage'
-import Auth from '../../pages/auth'
+import { Auth } from '../../pages/auth'
 import { RouteProps } from 'react-router'
 
 export const routes: Array<RouteProps> = [
   {
-    path: '/auth',
+    path: '/',
+    element: <Storage/>
+  },
+  {
+    path: '/auth/login',
+    element: <Auth/>
+  },
+  {
+    path: '/auth/registration',
     element: <Auth/>
   },
   {

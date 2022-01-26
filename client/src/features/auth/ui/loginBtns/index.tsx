@@ -11,7 +11,7 @@ export const LoginBtns:FunctionComponent<IProps> = () => {
       {
         token 
           ? <Button label="Sign Out" click={() => {}} classes={['btn-primary']}/>
-          : <Button label="Sign In" route='/auth' classes={['btn-primary']}/>
+          : <Button label="Sign In" route='/auth/login' classes={['btn-primary']}/>
       } 
     </div>
   )

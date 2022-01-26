@@ -4,8 +4,8 @@ import { routes } from "../app/providers/routes";
 export const Routing = () => 
   <Routes>
     {
-      routes.map(({path, element}) =>
-        <Route path={path} element={element}/>
+      routes.map(({path, element}, key) =>
+        <Route key={key} path={path} element={element}/>
       )
     }
   </Routes>
