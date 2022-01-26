@@ -8,7 +8,8 @@ router.post(
   '/registration', 
   [
     check('email', 'Incorrect email').isEmail(),
-    check('password', 'Incorrect pass').isLength({min: 5, max : 15})
+    check('password', 'Incorrect pass').isLength({min: 5, max : 15}),
+    check('name').exists()
   ],
   Registration
 )

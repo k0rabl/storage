@@ -14,7 +14,7 @@ export const Registration = async (req, res) => {
       return res.status(400).json({ msg: 'Incorrect req ', validErrors })
     }
 
-    const {email, password}, name = req.body
+    const {email, password, name} = req.body
 
     const user = await User.findOne({email})
 

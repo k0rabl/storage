@@ -20,8 +20,7 @@ export const authSlice = createSlice({
       delete state.activeUser 
       
       localStorage.removeItem('token')
-    },
-    registration: () => {}
+    }
   }
 })
 
@@ -29,8 +28,7 @@ export const authSlice = createSlice({
 
 export const { 
   logIn, 
-  logOut,
-  registration
+  logOut
 } = authSlice.actions
 
 export default authSlice.reducer
