@@ -1,4 +1,5 @@
 import { FunctionComponent, useState } from "react"
+import { useNavigate } from "react-router"
 import { Button } from "../../../../shared/button"
 import { Input } from "../../../../shared/input"
 import { registrationPost } from "../../model/actions"
@@ -13,6 +14,7 @@ interface IParams {
 
 export const Registration:FunctionComponent<IProps> = () => {
   const [params, setParams] = useState<IParams>({email: '', password: '', name: ''})
+
   const getValues = (value: object) => {
     setParams({
       ...params,
@@ -21,8 +23,6 @@ export const Registration:FunctionComponent<IProps> = () => {
   }
   
   const handleReg = () => {
-    //korabl123@yandex.ru
-    //qwerty123*
     registrationPost(params)
   }
   

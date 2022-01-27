@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react"
-import { connect, ConnectedProps } from "react-redux";
+import { connect, ConnectedProps, useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { ThunkDispatch } from "redux-thunk";
 import { RootState } from "../../../../redux/store";
@@ -15,23 +15,15 @@ interface IParams {
   pass: string
 }
 
-const mapProps = (dispatch: ThunkDispatch<RootState, {}, any>) => ({
-  onLogin: (email: string, password: string) => {    
-    dispatch(loginThunk(email, password))
-  }
-})
-
 const mapState = (state: RootState) => ({
   activeUser: state.auth.activeUser
 })
 
-const connector = connect(mapState, mapProps)
-
-type IProps = ConnectedProps<typeof connector> 
-
-const Login:FC<IProps> = (props) => {
-  const [params, setParams] = useState<IParams>({email: '', pass: ''})
+const Login:FC<{}> = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const {activeUser} = useSelector(mapState)
+  const [params, setParams] = useState<IParams>({email: '', pass: ''})
   
   const getValues = (value: object) => {
     setParams({
@@ -43,13 +35,13 @@ const Login:FC<IProps> = (props) => {
   const handleLogin = () => {
     //korabl123@yandex.ru
     //qwerty123*
-    props.onLogin(params.email, params.pass)
+    dispatch(loginThunk(params.email, params.pass))
   }
 
   useEffect(() => {
-    if(props.activeUser)
+    if(activeUser)
       navigate('/storage')
-  })
+  }, [activeUser])
 
   return(
     <>
@@ -61,10 +53,9 @@ const Login:FC<IProps> = (props) => {
       </div>
 
       <Button label="Log In" click={handleLogin} classes={['login__btn']}/>
-      
     </>
   )
 }
 
 
-export default connector(Login);
+export default Login;

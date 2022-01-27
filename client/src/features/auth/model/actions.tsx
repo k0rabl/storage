@@ -6,12 +6,13 @@ interface IParams {
   name: string
 }
 
-export const  registrationPost = async ({email, password, name}: IParams) => {
-  await instance.post('/auth/registration', {
+export const  registrationPost = ({email, password, name}: IParams) => {
+  instance.post('/auth/registration', {
     email,
     password,
     name
   })
-  .then(data => console.log(data))
+  .then(data => data.data.message)
   .catch(error => console.warn('Server error: ', error.response.data.msg))
+
 }
