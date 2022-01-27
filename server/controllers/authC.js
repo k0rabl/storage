@@ -1,8 +1,10 @@
 import User from '../models/User.js' 
+import File from '../models/File.js'
 import bcrypt from 'bcrypt'
 import {validationResult} from 'express-validator'
 import jwt from 'jsonwebtoken'
 import config from 'config'
+import { FileServices } from '../services/fileService.js'
 
 const privateKey = config.get('privateKey')
 
@@ -29,10 +31,14 @@ export const Registration = async (req, res) => {
     })
 
     await newUser.save()
+
+    const service = new FileServices()
+    await service.createDir(new File({user: newUser._id, name: ''}))
+
     return res.json({message: 'User is create!'})
 
   } catch (e) {
-    console.log(e)
+    console.log('Registration error: ', e)
     res.send({message: 'Server error'})
   }
 }
@@ -65,8 +71,29 @@ export const Login = async (req, res) => {
       }
     })
   } catch (e) {
-    console.log(e)
+    console.log('Login error: ', e)
     res.send({message: 'Server error'})
   }
 
+}
+
+export const Auth = async(req, res) => {
+  try {
+    const user = await User.findOne({_id: req.user.id})
+    const token = jwt.sign({id: user.id}, config.get("privateKey"), {expiresIn: "1h"})
+    
+    return res.json({
+        token,
+        user: {
+            id: user.id,
+            email: user.email,
+            diskSpace: user.diskSpace,
+            usedSpace: user.usedSpace,
+            avatar: user.avatar
+        }
+    })
+  } catch (e) {
+    console.log('Error Auth: ', e)
+    res.send({message: 'Server error'})
+  }
 }

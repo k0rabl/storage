@@ -5,11 +5,33 @@ import { logIn } from './authSlice'
 import { instance } from '../../../configs/axios'
 import { RootState } from '../../../redux/store'
 
-export const loginThunk =   (email: string, password: string):  ThunkAction<void, RootState, unknown, AnyAction> => dispatch => {
-  instance.post('/auth/login',{ 
-      email,
-      password
-  }).then(res => {
+export const loginThunk =   (email: string, password: string):  ThunkAction<void, RootState, unknown, AnyAction> => async dispatch => {
+  try{
+    const res = await instance.post('/auth/login',{ 
+        email,
+        password
+    })
+
     dispatch(logIn(res.data))
-  }).catch(error => console.warn('Server error: ', error.response.data.msg))
+  } catch (e: any) {
+    console.warn('Server error: ', e.response.data.msg)
+  }
+}
+
+export const authThunk = (): ThunkAction<void, RootState, unknown, AnyAction> => async dispatch => {
+  try {
+    const res = await instance.get(`/auth/auth`,
+        {
+          headers:{
+            Authorization:`Bearer ${localStorage.getItem('token')}`
+          }
+        }
+    )    
+
+    dispatch(logIn(res.data))
+
+  } catch(e: any) {
+    localStorage.removeItem('token')
+    console.warn('Server error: ', e.response.data.message)
+  } 
 }

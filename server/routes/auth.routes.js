@@ -1,6 +1,7 @@
 import {Router} from 'express'
-import { Registration, Login } from '../controllers/authC.js'
+import { Registration, Login, Auth } from '../controllers/authC.js'
 import {check} from 'express-validator'
+import { authMiddleware } from '../middleware/auth.middleware.js'
 
 const router = new Router()
 
@@ -19,5 +20,10 @@ router.post(
   Login
 )
 
+router.get(
+  '/auth', 
+  authMiddleware,
+  Auth
+)
 
 export default router
