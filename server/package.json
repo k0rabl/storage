@@ -1,33 +1,33 @@
 {
-  "name": "my_cloud",
-  "version": "1.0.0",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/k0rabl/storage.git"
-  },
-  "author": "Danil Korabl <k0rab1@ya.ru>",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/k0rabl/storage/issues"
-  },
-  "homepage": "https://github.com/k0rabl/storage#readme",
-  "dependencies": {
-    "bcrypt": "^5.0.1",
-    "config": "^3.3.6",
-    "cors": "^2.8.5",
-    "express": "^4.17.2",
-    "express-validator": "^6.14.0",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.1.2"
-  },
-  "devDependencies": {
-    "@types/express": "^4.17.13",
-    "nodemon": "^2.0.15"
-  }
+    "name": "my_cloud",
+    "version": "1.0.0",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "start": "node index.js",
+        "dev": "nodemon index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/k0rabl/storage.git"
+    },
+    "author": "Danil Korabl <k0rab1@ya.ru>",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/k0rabl/storage/issues"
+    },
+    "homepage": "https://github.com/k0rabl/storage#readme",
+    "dependencies": {
+        "bcrypt": "^5.0.1",
+        "config": "^3.3.6",
+        "cors": "^2.8.5",
+        "express": "^4.17.2",
+        "express-validator": "^6.14.0",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^6.1.2"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.13",
+        "nodemon": "^2.0.15"
+    }
 }
