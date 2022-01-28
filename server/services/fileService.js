@@ -29,12 +29,8 @@ export class FileServices {
       try {
         const filePath = `${config.get('drivePath')}\\${file.user}\\${file.path}`
 
-        if(fs.existsSync(filePath)){
-          fs.rmdirSync(filePath, { recursive: true, force: true })
-          return resolve({msg: 'File deleted succesfull!'})
-        } else {
-          return reject({msg: 'File doesen`t exist!'})        
-        }
+        fs.rmdirSync(filePath, { recursive: true, force: true })
+        return resolve({msg: 'File deleted succesfull!'})
 
       } catch (e) {
         console.log('deleteFile: ', e);
