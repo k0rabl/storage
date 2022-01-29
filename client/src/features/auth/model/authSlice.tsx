@@ -1,7 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export interface User {
-    activeUser?: Object
+    activeUser?: {         
+        id: string
+        name: string
+        email: string
+        files: []
+        diskSpace: number
+        useSpace: number
+    }
 }
 
 const initialState: User = {}
@@ -12,7 +19,7 @@ export const authSlice = createSlice({
     reducers: {
         logIn: (
             state,
-            action: PayloadAction<{ token: string; user: object }>
+            action: PayloadAction<{ token: string, user: User["activeUser"] }>
         ) => {
             state.activeUser = action.payload.user
 

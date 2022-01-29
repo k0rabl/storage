@@ -1,5 +1,7 @@
 import { FC } from 'react'
 import { Add } from '../../features/storage/ui/add'
+import { Layout } from '../../features/storage/ui/layout'
+import { Path } from '../../features/storage/ui/path'
 
 import './storage.sass'
 
@@ -7,12 +9,8 @@ interface IProps {}
 
 export const Storage: FC<IProps> = () => {
     return <div className="storage">
-      <div className="storage__path">
-
-      </div>
-      <div className="storage__layout">
-
-      </div>
+      <Path/>
+      <Layout/>
       <Add/>
     </div>
 }
