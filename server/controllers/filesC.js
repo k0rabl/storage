@@ -4,6 +4,19 @@ import User from '../models/User.js'
 import File from '../models/File.js'
 
 export class FileController {
+
+    async getFiles(req, res) {
+        try {
+            const user = await User.findById(req.user.id)
+            const files = await File.find({user: user._id})
+
+            res.json(files)
+        } catch (e) {
+            console.log('FileController get files: ', e)
+            res.status(401).json({ msg: 'FileController get files: ', e })
+        }
+    }
+
     async createDir(req, res) {
         try {
             const { name, type, parent } = req.body

@@ -6,7 +6,7 @@ const router = new Router()
 const controller = new FileController()
 
 router.post('', authMiddleware, controller.createDir)
-
 router.post('/delete', authMiddleware, controller.deleteFile)
+router.get('/get', authMiddleware,controller.getFiles)
 
 export default router
