@@ -7,6 +7,7 @@ import './path.sass'
 
 const mapState = (state: RootState) => ({
   activeUser: state.auth.activeUser,
+  storage: state.storage
 })
 
 export const Path: FC<{}> = () => {

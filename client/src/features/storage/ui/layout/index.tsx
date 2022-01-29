@@ -21,10 +21,9 @@ export const Layout: FC<{}> = () => {
 
   useEffect(() => {
     dispatch(getFilesThunk())
-  }, [])
+  }, [dispatch])
 
   useEffect(() => {
-    console.log(currentFolder);
     
     if(currentFolder){
       setFolder(files.find(element => element._id === currentFolder))
@@ -33,39 +32,38 @@ export const Layout: FC<{}> = () => {
       setCurrFiles(files.filter(element => !element.parent))
     }
 
-  }, [currentFolder])
+  }, [currentFolder, files])
   
   
   
   return (
     <div className="layout">
-      <div className="element elemnt__folder">
-        {
-          currFiles.length
-            ? currFiles.map(({_id, name, type, path, size}: File) => 
-              <Element 
-                key={_id}
-                id={_id}
-                name={name}
-                type={type}
-                path={path}
-                size={size}
-              />
-            ) 
-            : 'Folder is empty'
-        }
-        {
-          currentFolder &&
-          <Element 
-            key={folder?.parent}
-            id={folder?.parent || ''}
-            name='Back'
-            type='back'
-            path=''
-            size={0}
-        />
-        }
-      </div>
+      {
+        currentFolder &&
+        <Element 
+          key={folder?.parent}
+          id={folder?.parent || ''}
+          name='Back'
+          type='back'
+          path=''
+          size={0}
+      />
+      }
+      {
+        currFiles.length 
+          ? currFiles.map(({_id, name, type, path, size}: File) => 
+            <Element 
+              key={_id}
+              id={_id}
+              name={name}
+              type={type}
+              path={path}
+              size={size}
+            />
+          ) 
+        : <div className="storage-empty">Folder is empty</div>
+      }
+        
     </div>
   )
 }
