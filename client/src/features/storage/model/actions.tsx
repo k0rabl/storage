@@ -23,6 +23,20 @@ export const createFolder = async ({ name, type, parent }: IParams) => {
         )
 }
 
+export const uploadFile = async (file: File) => {
+    await instance
+        .post('/file/upload', {
+            file    
+        }, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            }
+        })
+        .catch((error) =>
+            console.warn('Server error: ', error.message)
+        )
+}
+
 export const deleteFilePost = async (id: string) => {
     await instance
         .post('file/delete', {

@@ -1,9 +1,9 @@
-import { FC, useContext, useState } from 'react'
+import { ChangeEvent, FC, useContext, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../../redux/store'
 import { Button } from '../../../../shared/button'
 import { Input } from '../../../../shared/input'
-import { createFolder } from '../../../storage/model/actions'
+import { createFolder, uploadFile } from '../../../storage/model/actions'
 import { getFilesThunk } from '../../../storage/model/storageMiddleware'
 
 import ModalContext from '../../model/context'
@@ -20,6 +20,7 @@ export const Modal:FC<{}> = () => {
   const dispatch = useDispatch()
 
   const [folderName, setFolderName] = useState<string>('New Folder')
+  const [filesForUpload, setFiles] = useState<any[]>([])
 
   const getValues = (value: any) => {
     setFolderName(value.folderName)
@@ -27,14 +28,30 @@ export const Modal:FC<{}> = () => {
 
   const handleClick = (type: string) => {
     if(type === 'close') setOpen(false)
-      
+
     if(type === 'addFolder') {      
       createFolder({name: folderName, parent: currentFolder, type: 'dir' })
       dispatch(getFilesThunk())
       setOpen(false)
     }
 
+    if(type === 'addFiles'){
+      filesForUpload.map(file => uploadFile(file))
+      
+    }
+
     handler()
+  }
+
+  const uploadFiles = (event: ChangeEvent<HTMLInputElement>) => {
+    const {files} = event.target
+
+    for (const key in files) {
+        const element = (files as any)[key]
+        
+        setFiles([...filesForUpload, element])
+    }
+    
   }
 
 
@@ -46,6 +63,7 @@ export const Modal:FC<{}> = () => {
           {
             type === 'addFolder' 
               ? <Input type="text" name="folderName" changeInput={getValues} label='New Folder'/> 
+                : type === 'addFiles' ?  <input type="file" name="files" multiple onChange={uploadFiles} /> 
               : 'You realy want exit from edit-mode?'
           }
         </p>

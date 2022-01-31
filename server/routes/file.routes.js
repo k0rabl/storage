@@ -7,6 +7,7 @@ const controller = new FileController()
 
 router.post('', authMiddleware, controller.createDir)
 router.post('/delete', authMiddleware, controller.deleteFile)
-router.get('/get', authMiddleware,controller.getFiles)
+router.post('/upload', authMiddleware, controller.uploadFiles)
+router.get('/get', authMiddleware, controller.getFiles)
 
 export default router

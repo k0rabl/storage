@@ -11,13 +11,11 @@ import './add.sass'
 export const Add: FC<{}> = () => {
   const context = useContext(ModalContext)
 
-  const handleShowModal = () => {
+  const handleShowModal = (type: string) => {
     const { setOpen, setType } = context 
     
-    setType('addFolder')
+    setType(type)
     setOpen(true)
-
-    
   }
 
   return (
@@ -26,12 +24,12 @@ export const Add: FC<{}> = () => {
           <PlusIcon />
 
           <div className="add__list">
-            <div onClick={handleShowModal} className="add__element">
+            <div onClick={() => handleShowModal('addFolder')} className="add__element">
               <AddFolderIcon />
               Add folder
             </div>
 
-            <div className="add__element">
+            <div onClick={() => handleShowModal('addFiles')} className="add__element">
               <AddFileIcon />
               Add file 
             </div>

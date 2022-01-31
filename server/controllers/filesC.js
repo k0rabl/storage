@@ -46,6 +46,23 @@ export class FileController {
         }
     }
 
+    async uploadFiles(req, res) {
+        try {
+            const {file} = req.body
+            console.log('files: ', file);
+            // files.forEach(file => {
+            //     const file = new File({ name, type, user: req.user.id })
+            //     const parentFile = await File.findOne({ _id: parent })
+
+            // })
+            res.json({ msg: 'Good!'})
+
+        } catch (error) {
+            console.log('FileController upload files: ', e)
+            res.status(401).json({ msg: 'FileController upload files: ', e })
+        }
+    }
+
     async deleteFile(req, res) {
         try {
             const { id } = req.body
