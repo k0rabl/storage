@@ -18,23 +18,23 @@ export const Layout: FC<{}> = () => {
   
   const [currFiles, setCurrFiles] = useState<File[]>([...files])
   const [folder, setFolder] = useState<File>()
+  const [isEmpty, setEmpty] = useState<boolean>(false)
 
-  useEffect(() => {
+  useEffect(() => {    
     dispatch(getFilesThunk())
   }, [dispatch])
 
   useEffect(() => {
-    
     if(currentFolder){
       setFolder(files.find(element => element._id === currentFolder))
       setCurrFiles(files.filter(element => element.parent === currentFolder))
     } else {
       setCurrFiles(files.filter(element => !element.parent))
     }
+    
+ 
 
-  }, [currentFolder, files])
-  
-  
+  }, [files, currentFolder])
   
   return (
     <div className="layout">
@@ -47,11 +47,13 @@ export const Layout: FC<{}> = () => {
           type='back'
           path=''
           size={0}
-      />
+        />
       }
+
       {
-        currFiles.length 
-          ? currFiles.map(({_id, name, type, path, size}: File) => 
+        !currFiles.length 
+          ? <div className="storage-empty">Folder is empty</div>
+          : currFiles.map(({_id, name, type, path, size}: File) => 
             <Element 
               key={_id}
               id={_id}
@@ -61,7 +63,6 @@ export const Layout: FC<{}> = () => {
               size={size}
             />
           ) 
-        : <div className="storage-empty">Folder is empty</div>
       }
         
     </div>

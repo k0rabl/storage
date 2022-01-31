@@ -7,7 +7,10 @@ interface IProps {}
 
 export const Header: FunctionComponent<IProps> = () => (
     <div className="header">
-        <h1>MyCloud</h1>
+        <h1 className='header__logo'>
+            <img className='header__logoImage' src="./label.png" alt="" />
+            MyCloud
+        </h1>
         <p>Search-bar</p>
         <LoginBtns />
     </div>

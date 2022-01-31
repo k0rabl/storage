@@ -1,0 +1,23 @@
+.CM
+  position: absolute
+  left: 0
+  bottom: -50px
+  background-color: #fff
+  max-height: 0
+  border-radius: 5px
+  box-shadow: 0 0 15px 0 rgba(0,0,0,.1)
+  overflow: hidden
+  width: 100%
+  transition: all .2s
+  &-open
+    max-height: 100%
+  &__element
+    display: flex
+    align-items: center
+    cursor: pointer
+    &:hover
+      background-color: #0e6bab
+      color: #fff
+      transition: .2s all
+      svg
+        fill: #fff

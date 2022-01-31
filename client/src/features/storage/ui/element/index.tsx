@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { FC } from 'react'
+import { FC, MouseEvent, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { handleCurrFolder } from '../../model/storageSlice'
 
@@ -8,6 +8,7 @@ import './element.sass'
 import FileIcon from '../../../../shared/svg/file'
 import BackIcon from '../../../../shared/svg/back'
 import FolderIcon from '../../../../shared/svg/folder'
+import { ContextMenu } from '../contextMenu'
 
 interface IElement {
   id: string
@@ -19,13 +20,21 @@ interface IElement {
 
 export const Element: FC<IElement> = ({id, name, type, path, size}) => {
   const dispatch = useDispatch()
+  const [isOpenCM, setOpenCM] = useState<boolean>(false)
 
   const handleClick = (id: string) => {
-    dispatch(handleCurrFolder(id))
+    if (type === 'dir' || type === 'back')
+      dispatch(handleCurrFolder(id))
   }
+
+  const handleMenu = (event: MouseEvent<HTMLDivElement>) =>{
+    event.preventDefault()
+    setOpenCM(!isOpenCM)
+  } 
 
   const classses = classNames([
     'element', 
+    isOpenCM && 'element-active', 
     type === 'dir' 
       ? 'element-folder' :
         type === 'back' ? 'element-back'
@@ -33,7 +42,8 @@ export const Element: FC<IElement> = ({id, name, type, path, size}) => {
   ])
   
   return (
-    <div onClick={() => handleClick(id)} title={String(size)} className={classses}>
+    <div className='element__container'>
+    <div onContextMenu={handleMenu} onClick={() => handleClick(id)} title={String(size)} className={classses}>
       {
           type === 'dir' 
           ? <FolderIcon />  :
@@ -41,6 +51,9 @@ export const Element: FC<IElement> = ({id, name, type, path, size}) => {
           : <FileIcon />
       }
       <div className="element__name">{name}</div>
+    </div>
+    
+    <ContextMenu isOpen={isOpenCM} fileId={id}/>
     </div>
   )
 }

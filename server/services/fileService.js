@@ -3,9 +3,7 @@ import config from 'config'
 
 export class FileServices {
     createDir(file) {
-        const filePath = `${config.get('drivePath')}\\${file.user}\\${
-            file.path
-        }`
+        const filePath = `${config.get('drivePath')}\\${file.user}\\${file.path}`
 
         return new Promise((resolve, reject) => {
             try {

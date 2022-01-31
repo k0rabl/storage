@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 interface IState {
   isOpen: boolean
   type: string
-  params: any[]
   hand: Function
 }
 
@@ -12,7 +11,7 @@ const ModalContext = React.createContext({
     type: '',
     setOpen: (c: boolean) => {},
     setType: (c: string) => {},
-    setHandler: (c: Function, p?: any[]) => {},
+    setHandler: (c: Function) => {},
     handler: () => {}
   })
 
@@ -22,8 +21,7 @@ class ModalProvider extends Component {
   state: IState = {
     isOpen: false,
     type: '',
-    hand: () => {},
-    params: []
+    hand: () => {}
   }
  
 
@@ -37,15 +35,13 @@ class ModalProvider extends Component {
   }
   
 
-  setHandler = (hand: Function, params?: any[]) => {
-    this.setState((prevState) => ({
-      hand: hand,
-      params: params && []
-    }))
+  setHandler = (hand: Function) => {
+    this.setState((prevState) => ({ hand }))
   }
 
   handler = () => {
-    this.state.hand(...this.state.params)
+    
+    this.state.hand()
   }
 
   render() {

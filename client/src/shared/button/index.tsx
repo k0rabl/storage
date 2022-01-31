@@ -12,7 +12,11 @@ interface IProps {
 }
 
 export const Button: FC<IProps> = ({ label, click, classes, route }) => (
-    <div onClick={click} className={classNames(['btn', ...classes])}>
-        {route ? <Link to={route}>{label}</Link> : label}
-    </div>
+    <>
+        {
+            route 
+                ? <Link onClick={click} className={classNames(['btn', ...classes])} to={route}>{label}</Link> 
+                : <div onClick={click} className={classNames(['btn', ...classes])}>{label}</div>
+        }
+    </>
 )

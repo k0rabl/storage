@@ -12,7 +12,7 @@ export const getFilesThunk = (): ThunkAction<void, RootState, unknown, AnyAction
           Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     })
-
+    
     dispatch(getFiles(res.data))
   } catch (e: any) {
       console.warn('Server error: ', e.response.data.message)

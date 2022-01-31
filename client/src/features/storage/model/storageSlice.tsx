@@ -11,7 +11,7 @@ export interface File {
 }
 
 interface State {
-  files: File[],
+  files: File[]
   currentFolder: string
 }
 
@@ -29,10 +29,13 @@ export const fileSlice = createSlice({
       },
       handleCurrFolder: (state, action: PayloadAction<string>) => {
         state.currentFolder = action.payload
+      },
+      deleteFile: (state, action: PayloadAction<string>) => {
+        state.files = state.files.filter(el => el._id !== action.payload)
       }
     },
 })
 
-export const { getFiles, handleCurrFolder } = fileSlice.actions
+export const { getFiles, handleCurrFolder, deleteFile } = fileSlice.actions
 
 export default fileSlice.reducer
