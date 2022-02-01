@@ -1,7 +1,61 @@
 import { FileServices } from '../services/fileService.js'
+import config from 'config'
 
 import User from '../models/User.js'
 import File from '../models/File.js'
+
+async function recursiveDel(files) {
+    if (!files.length) return null
+
+    const children = await files.reduce(async (accum, elem) => {
+        const file = await File.findById(elem)
+
+        if (!file) return await accum
+
+        const arr = [...(await accum), ...file.child]
+
+        await File.findByIdAndDelete(elem)
+        return arr
+    }, [])
+
+    return recursiveDel(children)
+}
+
+const addFileToModel = async ({name, mimetype, size, mv}, parent = null, user) => {
+
+   try {
+        const userM = await User.findById(user)
+        
+        if (userM.size + size > config.get('maxUserSpace'))
+            return res.status(401).json({ msg: 'You need more space!' })
+        
+        let path = `${config.get('drivePath')}\\${user}\\`
+
+        const model = new File({
+            name, 
+            type: mimetype, 
+            size, 
+            user
+        })
+        
+        if(parent) {
+            model.parent = parent._id
+            model.path = parent.path
+
+            path += parent.path
+
+            parent.child.push(model._id)
+        } 
+        
+        model.path += `\\${name}`
+
+        
+        model.save()
+        mv(`${path}\\${name}`)
+   } catch (e) {
+       return 'Problem in helper: ' + e
+   }
+} 
 
 export class FileController {
 
@@ -46,19 +100,30 @@ export class FileController {
         }
     }
 
+    
+
     async uploadFiles(req, res) {
         try {
             const { files } = req.files
-            const { user } = req.user
+            const { parent } = req.body
+            const userId = req.user.id
+            
+            let parentFile
 
-            files.map(file => {
-                
-                // file.mv(path)
-            })
+            if(parent)
+                parentFile = await File.findById(parent)
+            
+            if (Array.isArray(files)){
+                files.map(file => 
+                    addFileToModel(file, parentFile, userId)  
+                )
+            } else{ 
+                addFileToModel(files, parentFile, userId)
+            }
            
             res.json({ msg: 'Good!'})
 
-        } catch (error) {
+        } catch (e) {
             console.log('FileController upload files: ', e)
             res.status(401).json({ msg: 'FileController upload files: ', e })
         }
@@ -72,21 +137,11 @@ export class FileController {
 
             if (!fileForRm) res.status(401).json({ msg: 'File doesen`t exist' })
 
-            async function recursiveDel(files) {
-                if (!files.length) return null
-
-                const children = await files.reduce(async (accum, elem) => {
-                    const file = await File.findById(elem)
-
-                    if (!file) return await accum
-
-                    const arr = [...(await accum), ...file.child]
-
-                    await File.findByIdAndDelete(elem)
-                    return arr
-                }, [])
-
-                return recursiveDel(children)
+            if (fileForRm.type !== 'dir'){
+                await File.findByIdAndDelete(fileForRm)
+                await service.deleteFile(fileForRm)
+                res.json({ msg: 'File deleted!' })
+                return null
             }
 
             await recursiveDel(fileForRm.child)
