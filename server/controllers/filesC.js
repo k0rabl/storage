@@ -48,13 +48,14 @@ export class FileController {
 
     async uploadFiles(req, res) {
         try {
-            const {file} = req.body
-            console.log('files: ', file);
-            // files.forEach(file => {
-            //     const file = new File({ name, type, user: req.user.id })
-            //     const parentFile = await File.findOne({ _id: parent })
+            const { files } = req.files
+            const { user } = req.user
 
-            // })
+            files.map(file => {
+                
+                // file.mv(path)
+            })
+           
             res.json({ msg: 'Good!'})
 
         } catch (error) {

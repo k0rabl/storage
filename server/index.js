@@ -3,6 +3,9 @@ import mongoose from 'mongoose'
 import config from 'config'
 import cors from 'cors'
 
+import fileUpload from 'express-fileupload'
+
+
 import authRouter from './routes/auth.routes.js'
 import fileRouter from './routes/file.routes.js'
 const app = express()
@@ -13,6 +16,8 @@ const URI = config.get('dbConnect')
 app.use(cors())
 
 app.use(express.json())
+
+app.use(fileUpload())
 
 //routes
 app.use('/api/auth', authRouter)
