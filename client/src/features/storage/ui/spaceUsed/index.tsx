@@ -14,23 +14,26 @@ export const SpaceUsed: FC<{}> = () => {
   const { activeUser } = useSelector(mapState)
   const usedLineRef = useRef<HTMLDivElement>(null)
 
-  const [freeSpace, setFreeSpace] = useState<number>(0)
   const [usedSpace, setUsedSpace] = useState<number>(0)
 
   useEffect(() => {
     
     if (activeUser) {
-      console.log(activeUser.diskSpace, activeUser.usedSpace);
-      setFreeSpace(+((activeUser.diskSpace - activeUser.usedSpace ) / (1024 ** 3)).toFixed(2))
       setUsedSpace(+((activeUser.usedSpace ) / (1024 ** 3)).toFixed(2))
 
-
       const onePer = activeUser?.diskSpace / 100
-      const usedSpaceInPer = ((activeUser.diskSpace - activeUser.usedSpace) / onePer)
-      const usrdSpaacePercent = 100 - +usedSpaceInPer.toFixed(2)
+      const freeSpaceInPer = ((activeUser.diskSpace - activeUser.usedSpace) / onePer)
+      const usedSpaacePercent = 100 - +freeSpaceInPer.toFixed(2)
 
-      if (usedLineRef?.current) 
-        usedLineRef.current.style.width = `${usrdSpaacePercent.toFixed(2)}%`
+      
+      if (usedLineRef?.current) {
+        
+        if (usedSpaacePercent > 90)
+         usedLineRef.current?.classList.add('spaceUsed__line-wrong')
+
+        usedLineRef.current.style.width = `${usedSpaacePercent.toFixed(2)}%`
+
+      }
     }
     
   }, [])

@@ -55,7 +55,7 @@ export const Modal:FC<{}> = () => {
   return(
     <div className={`modalC ${isOpen && 'opened'}`}>
       <div className="modalC__content">
-        <h6 className="modalC__title">{type === 'addFolder' ? 'Create folder' : 'Exit'}</h6>
+        <h6 className="modalC__title">{type === 'addFolder' ? 'Create folder' : type === 'addFiles' ? 'Upload File' :  'Exit'}</h6>
         <p className="modalC__text">
           {
             type === 'addFolder' 
@@ -71,7 +71,7 @@ export const Modal:FC<{}> = () => {
               classes={['btn_no']}
             />
             <Button
-                label={type === 'addFolder' ? 'Create' : 'Exit'}
+                label={type === 'addFolder' ? 'Create' : type === 'addFiles' ? 'Upload' : 'Exit'}
                 click={() => handleClick(type)}
                 classes={['btn_yes']}
 

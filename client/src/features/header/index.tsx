@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react'
 import LoginBtns from '../auth/ui/loginBtns'
+import { Search } from '../search'
 
 import './header.sass'
 
@@ -11,7 +12,7 @@ export const Header: FunctionComponent<IProps> = () => (
             <img className='header__logoImage' src="./label.png" alt="" />
             MyCloud
         </h1>
-        <p>Search-bar</p>
+        <Search/>
         <LoginBtns />
     </div>
 )

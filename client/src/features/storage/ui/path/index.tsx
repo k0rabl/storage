@@ -49,10 +49,12 @@ export const Path: FC<{}> = () => {
   return (
     <div className="path">
        {path.map((elem, index) => 
-          <div onClick={() => handleClick(elem.id)} className="path__element">
-            <span key={elem.id} className="path__folder">{elem.name}</span>
+
+          <div  key={elem.id} onClick={() => handleClick(elem.id)} className="path__element">
+            <span className="path__folder">{elem.name}</span>
             {index !== path.length -1 && <span className="path__split">/</span>}
           </div>
+
        )}
     </div>
   )
