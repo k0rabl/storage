@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { FC, MouseEvent, useState } from 'react'
+import { FC, MouseEvent, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { handleCurrFolder } from '../../model/storageSlice'
 
@@ -31,6 +31,12 @@ export const Element: FC<IElement> = ({id, name, type, path, size}) => {
     event.preventDefault()
     setOpenCM(!isOpenCM)
   } 
+
+  useEffect(() => {
+    window.addEventListener('mousedown', () => setOpenCM(false))
+  
+  }, []);
+  
 
   const classses = classNames([
     'element', 

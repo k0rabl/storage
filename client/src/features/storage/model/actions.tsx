@@ -23,13 +23,23 @@ export const createFolder = async ({ name, type, parent }: IParams) => {
         )
 }
 
-export const uploadFile = async (file: File) => {
+export const uploadFile = async (files: FileList | null | undefined, parent: string) => {
+    let formData = new FormData()
+    
+    for (const key in files){
+        const elem = (files as any)[key]
+
+        if (typeof elem === 'object')
+            formData.append('files', elem)
+    }
+    
+    formData.append('parent', parent)
+    
     await instance
-        .post('/file/upload', {
-            file    
-        }, {
+        .post('/file/upload', formData, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'multipart/form-data'
             }
         })
         .catch((error) =>

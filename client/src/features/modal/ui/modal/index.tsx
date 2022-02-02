@@ -20,7 +20,7 @@ export const Modal:FC<{}> = () => {
   const dispatch = useDispatch()
 
   const [folderName, setFolderName] = useState<string>('New Folder')
-  const [filesForUpload, setFiles] = useState<any[]>([])
+  const [filesForUpload, setFiles] = useState<FileList | null>()
 
   const getValues = (value: any) => {
     setFolderName(value.folderName)
@@ -30,14 +30,17 @@ export const Modal:FC<{}> = () => {
     if(type === 'close') setOpen(false)
 
     if(type === 'addFolder') {      
-      createFolder({name: folderName, parent: currentFolder, type: 'dir' })
-      dispatch(getFilesThunk())
-      setOpen(false)
+      createFolder({name: folderName, parent: currentFolder, type: 'dir' }).then(res => {
+        dispatch(getFilesThunk())
+        setOpen(false)
+      })
     }
 
     if(type === 'addFiles'){
-      filesForUpload.map(file => uploadFile(file))
-      
+      uploadFile(filesForUpload, currentFolder).then(res => {
+        dispatch(getFilesThunk())
+        setOpen(false)
+      })
     }
 
     handler()
@@ -45,13 +48,7 @@ export const Modal:FC<{}> = () => {
 
   const uploadFiles = (event: ChangeEvent<HTMLInputElement>) => {
     const {files} = event.target
-
-    for (const key in files) {
-        const element = (files as any)[key]
-        
-        setFiles([...filesForUpload, element])
-    }
-    
+    setFiles(files)
   }
 
 
