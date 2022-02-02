@@ -20,9 +20,7 @@ export const ContextMenu: FC<{isOpen: boolean, fileId: string}> = ({isOpen, file
     dispatch(deleteFile(fileId))
   }
 
-  const downloadElement = () => {
-    console.log('test');
-    
+  const downloadElement = () => {    
     downloadFile(fileId)    
   }
 

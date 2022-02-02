@@ -2,3 +2,20 @@
   background-color: #fff
   padding: 15px
   box-shadow: 0 20px 15px -15px rgba(0,0,0,.2)
+  display: flex
+  
+  &__element
+    margin-right: 5px
+  &__folder
+    margin-right: 5px
+    cursor: pointer
+    transition: color .2s
+    font-size: 18px
+    font-weight: 300
+    &:hover
+      color: #5aa4d6
+    &:last-child
+      cursor: default
+      &:hover
+        color: #25272a
+      

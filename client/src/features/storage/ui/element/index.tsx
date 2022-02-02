@@ -9,6 +9,7 @@ import FileIcon from '../../../../shared/svg/file'
 import BackIcon from '../../../../shared/svg/back'
 import FolderIcon from '../../../../shared/svg/folder'
 import { ContextMenu } from '../contextMenu'
+import { downloadFile } from '../../model/actions'
 
 interface IElement {
   id: string
@@ -25,6 +26,8 @@ export const Element: FC<IElement> = ({id, name, type, path, size}) => {
   const handleClick = (id: string) => {
     if (type === 'dir' || type === 'back')
       dispatch(handleCurrFolder(id))
+    else
+      downloadFile(id)
   }
 
   const handleMenu = (event: MouseEvent<HTMLDivElement>) =>{
