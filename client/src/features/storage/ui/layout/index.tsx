@@ -18,7 +18,6 @@ export const Layout: FC<{}> = () => {
   
   const [currFiles, setCurrFiles] = useState<File[]>([...files])
   const [folder, setFolder] = useState<File>()
-  const [isEmpty, setEmpty] = useState<boolean>(false)
 
   useEffect(() => {    
     dispatch(getFilesThunk())

@@ -33,7 +33,7 @@ export const Element: FC<IElement> = ({id, name, type, path, size}) => {
   } 
 
   useEffect(() => {
-    window.addEventListener('mousedown', () => setOpenCM(false))
+    // window.addEventListener('mousedown', () => setOpenCM(false))
   
   }, []);
   

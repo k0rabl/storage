@@ -1,5 +1,4 @@
 import { instance } from '../../../configs/axios'
-import { getFilesThunk } from './storageMiddleware'
 
 interface IParams {
     name: string
@@ -55,5 +54,31 @@ export const deleteFilePost = async (id: string) => {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             }
+        })
+}
+
+
+export const downloadFile = async (id: string) => {
+    await instance
+        .get('file/download', {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            },
+            params: {
+                fileId: id
+            }
+        }).then(res => {          
+            const url = window.URL.createObjectURL(new Blob([res.data],
+                { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }))
+
+            const link = document.createElement('a')
+
+            link.href = url
+            link.setAttribute('download',
+                res.headers["content-disposition"].split("filename=")[1].replaceAll('"', ''))
+
+            document.body.appendChild(link)
+            link.click()
+            document.body.removeChild(link)
         })
 }

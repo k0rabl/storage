@@ -1,13 +1,15 @@
 import { FC } from 'react'
 import classNames from 'classnames'
 
-import './contextMenu.sass'
-
-import Delete from '../../../../shared/svg/delete'
-import { deleteFilePost } from '../../model/actions'
+import { deleteFilePost, downloadFile } from '../../model/actions'
 import { deleteFile } from '../../model/storageSlice'
 import { useDispatch } from 'react-redux'
-import Download from '../../../../shared/svg/download'
+
+import './contextMenu.sass'
+
+import DeleteIcon from '../../../../shared/svg/delete'
+import DownloadIcon from '../../../../shared/svg/download'
+
 
 
 export const ContextMenu: FC<{isOpen: boolean, fileId: string}> = ({isOpen, fileId}) => {
@@ -17,18 +19,21 @@ export const ContextMenu: FC<{isOpen: boolean, fileId: string}> = ({isOpen, file
     deleteFilePost(fileId)
     dispatch(deleteFile(fileId))
   }
-  const downloadElement =() => {
 
+  const downloadElement = () => {
+    console.log('test');
+    
+    downloadFile(fileId)    
   }
 
   return(
     <div className={classNames([isOpen ? 'CM CM-open' : 'CM'])}>
-      <div onClick={deleteElement} className="CM__element">
-        <Delete/>
+      <div onClick={deleteElement} className="CM__element CM__delete">
+        <DeleteIcon/>
         Delete
       </div>
-      <div onClick={downloadElement} className="CM__element">
-        <Download/>
+      <div onClick={downloadElement} className="CM__element CM__download">
+        <DownloadIcon/>
         Download
       </div>
     </div>

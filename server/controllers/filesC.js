@@ -121,11 +121,31 @@ export class FileController {
                 addFileToModel(files, parentFile, userId)
             }
            
-            res.json({ msg: 'Good!'})
+            res.json({ msg: 'Files is uploaded!'})
 
         } catch (e) {
             console.log('FileController upload files: ', e)
             res.status(401).json({ msg: 'FileController upload files: ', e })
+        }
+    }
+
+    async downloadFile(req, res) {
+        try {
+            const {fileId} = req.query
+            const userId = req.user.id
+
+            const file = await File.findById(fileId)
+            
+            if (!file) res.status(401).json({ msg: 'File doesen`t exist' })
+
+            const path = `${config.get('drivePath')}\\${userId}\\${file.path}`
+
+            res.setHeader('Access-Control-Expose-Headers','Content-Disposition')
+            res.download(path, file.name)
+                    
+        } catch (e) {
+            console.log('FileController download files: ', e)
+            res.status(401).json({ msg: 'FileController download files: ', e })
         }
     }
 
