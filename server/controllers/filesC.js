@@ -48,8 +48,9 @@ const addFileToModel = async ({name, mimetype, size, mv}, parent = null, user) =
         } 
         
         model.path += `\\${name}`
-
+        userM.usedSpace = userM.usedSpace + size
         
+        userM.save()
         model.save()
         mv(`${path}\\${name}`)
    } catch (e) {
@@ -152,14 +153,22 @@ export class FileController {
     async deleteFile(req, res) {
         try {
             const { id } = req.body
+            const userId = req.user.id
+
             const service = new FileServices()
             const fileForRm = await File.findById(id)
 
             if (!fileForRm) res.status(401).json({ msg: 'File doesen`t exist' })
 
             if (fileForRm.type !== 'dir'){
+
                 await File.findByIdAndDelete(fileForRm)
                 await service.deleteFile(fileForRm)
+
+                const user = await User.findById(userId)
+                user.usedSpace = user.usedSpace - fileForRm.size
+                user.save()
+
                 res.json({ msg: 'File deleted!' })
                 return null
             }

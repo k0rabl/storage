@@ -1,0 +1,42 @@
+.spaceUsed
+  position: fixed
+  bottom: 25px
+  left: 25px
+  padding: 15px
+  background-color: #fff
+  border-radius: 5px
+  box-shadow: 0 0 15px 0 rgba(0,0,0,.1)
+  display: flex
+  align-items: center
+  &__line
+    width: 300px
+    height: 8px
+    border-radius: 4px
+    background: #bdbcbc
+    margin-right: 10px
+    &-used
+      min-width: 1%
+      height: 8px
+      border-radius: 5px
+      background: #0e6bab
+      transition: all .2s
+      position: relative
+      .spaceUsed__usedDigit
+        background-color: #fff
+        border-radius: 5px
+        box-shadow: 0 0 15px 0 rgba(0,0,0,.1)
+        padding: 5px
+        display: inline-block
+        position: absolute
+        top: -25px
+        left: 20%
+        min-width: 40px
+        font-size: 10px
+        opacity: 0
+        transition: opacity .2s
+      &:hover
+        transform: scale(1.2)
+        .spaceUsed__usedDigit
+          opacity: 1
+  &__digits
+    font-size: 15px

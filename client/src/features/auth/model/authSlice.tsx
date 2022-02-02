@@ -7,7 +7,7 @@ export interface User {
         email: string
         files: []
         diskSpace: number
-        useSpace: number
+        usedSpace: number
     }
 }
 
