@@ -17,7 +17,7 @@ app.use(cors())
 
 app.use(express.json())
 
-app.use(fileUpload({parseNested: true}))
+app.use(fileUpload())
 
 //routes
 app.use('/api/auth', authRouter)

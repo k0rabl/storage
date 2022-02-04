@@ -1,7 +1,8 @@
-import { FC, useEffect, useState } from 'react'
+import { DragEvent, FC, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../../redux/store'
 import { getFilesThunk } from '../../model/storageMiddleware'
+import { uploadFile } from '../../../storage/model/actions'
 import { File } from '../../model/storageSlice'
 import { Element } from '../element'
 
@@ -13,30 +14,62 @@ const mapState = (state: RootState) => ({
 })
 
 export const Layout: FC<{}> = () => {
-  const dispatch = useDispatch()
-  const { storage: {files, currentFolder} } = useSelector(mapState)
-  
-  const [currFiles, setCurrFiles] = useState<File[]>([...files])
+  const { storage: {files, currentFolder} } = useSelector(mapState)  
   const [folder, setFolder] = useState<File>()
+  const [dropZone, setDropZone] = useState<boolean>(false)
+  const dispatch = useDispatch()
+
 
   useEffect(() => {    
     dispatch(getFilesThunk())
-  }, [dispatch])
+
+  }, [])
+
+  const cancelDefault = (e: DragEvent<HTMLDivElement>) => {
+    e.stopPropagation()
+    e.preventDefault()
+  }
+
+  const handleDragEnter = (e: DragEvent<HTMLDivElement>) => {
+    handleDrop(e)
+
+    setDropZone(true)
+  }
+
+  const handleDragLeave = (e: DragEvent<HTMLDivElement>) => {
+    handleDrop(e)
+
+    
+    setDropZone(false)
+  }
+
+  const handleDrop = async (e: DragEvent<HTMLDivElement>) => {
+    handleDrop(e)
+
+    setDropZone(false)
+
+    if(e.dataTransfer.files.length){
+      await uploadFile(e.dataTransfer.files, currentFolder)
+      dispatch(getFilesThunk())
+    }
+  }
 
   useEffect(() => {
-    if(currentFolder){
+
+    if(currentFolder)
       setFolder(files.find(element => element._id === currentFolder))
-      setCurrFiles(files.filter(element => element.parent === currentFolder))
-    } else {
-      setCurrFiles(files.filter(element => !element.parent))
-    }
-    
- 
 
   }, [files, currentFolder])
   
   return (
-    <div className="layout">
+    <div className='layout' onDragEnter={handleDragEnter}>
+      <div
+        className={dropZone ? 'layout__dropzone-active layout__dropzone': 'layout__dropzone'} 
+        onDragLeave={handleDragLeave}
+        onDragEnter={handleDragEnter}
+        onDrop={handleDrop}
+        onDragOver={cancelDefault}
+      />
       {
         currentFolder &&
         <Element 
@@ -49,19 +82,20 @@ export const Layout: FC<{}> = () => {
         />
       }
 
-      {
-        !currFiles.length 
-          ? <div className="storage-empty">Folder is empty</div>
-          : currFiles.map(({_id, name, type, path, size}: File) => 
-            <Element 
-              key={_id}
-              id={_id}
-              name={name}
-              type={type}
-              path={path}
-              size={size}
-            />
-          ) 
+      {files.filter(element =>  currentFolder 
+          ? element.parent === currentFolder 
+          : !element.parent
+        ).map(({_id, name, type, path, size}: File) => 
+          <Element 
+            key={_id}
+            id={_id}
+            name={name}
+            type={type}
+            path={path}
+            size={size}
+          />
+        ) 
+        // <div className="storage-empty">Folder is empty</div>
       }
         
     </div>

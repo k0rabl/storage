@@ -1,5 +1,6 @@
 import { FileServices } from '../services/fileService.js'
 import config from 'config'
+import fs from 'fs'
 
 import User from '../models/User.js'
 import File from '../models/File.js'
@@ -21,42 +22,6 @@ async function recursiveDel(files) {
     return recursiveDel(children)
 }
 
-const addFileToModel = async ({name, mimetype, size, mv}, parent = null, user) => {
-
-   try {
-        const userM = await User.findById(user)
-        
-        if (userM.size + size > config.get('maxUserSpace'))
-            return res.status(401).json({ msg: 'You need more space!' })
-        
-        let path = `${config.get('drivePath')}\\${user}\\`
-
-        const model = new File({
-            name, 
-            type: mimetype, 
-            size, 
-            user
-        })
-        
-        if(parent) {
-            model.parent = parent._id
-            model.path = parent.path
-
-            path += parent.path
-
-            parent.child.push(model._id)
-        } 
-        
-        model.path += `\\${name}`
-        userM.usedSpace = userM.usedSpace + size
-        
-        userM.save()
-        model.save()
-        mv(`${path}\\${name}`)
-   } catch (e) {
-       return 'Problem in helper: ' + e
-   }
-} 
 
 export class FileController {
 
@@ -82,9 +47,9 @@ export class FileController {
             if (!parent.length) {
                 file.path = name
             } else {
-                file.parent = parent
                 const parentFile = await File.findOne({ _id: parent })
 
+                file.parent = parent
                 file.path = `${parentFile.path}\\${name}`
 
                 parentFile.child.push(file._id)
@@ -106,27 +71,58 @@ export class FileController {
     async uploadFiles(req, res) {
         try {
             const { files } = req.files
-            const { parent } = req.body
+            const parentId = req.body.parent
             const userId = req.user.id
+            const arrFiles = Array.isArray(files) ? files : [files]
+                        
+            arrFiles.map(async ({name, size, mimetype, mv}) => {
+                try {
+                    const userM = await User.findById(userId)
             
-            let parentFile
+                    if (userM.size + size > config.get('maxUserSpace'))
+                        throw 'You need more space!'
+                    
+                    let path = `${config.get('drivePath')}\\${userId}\\`
+            
+                    const fileM = new File({
+                        name, 
+                        size, 
+                        type: mimetype, 
+                        user: userId
+                    })
+                    
+                    if(parentId) {
+                        const parentFile = await File.findById(parentId)
 
-            if(parent)
-                parentFile = await File.findById(parent)
+                        fileM.parent = parentFile._id
+                        fileM.path = parentFile.path
             
-            if (Array.isArray(files)){
-                files.map(file => 
-                    addFileToModel(file, parentFile, userId)  
-                )
-            } else{ 
-                addFileToModel(files, parentFile, userId)
-            }
+                        path += parentFile.path
+            
+                        parentFile.child.push(fileM._id)
+
+                        parentFile.save()
+                    } 
+                    
+                    fileM.path += `\\${name}`
+                    userM.usedSpace = userM.usedSpace + size
+            
+                    if (fs.existsSync(`${path}\\${name}`)) {
+                        throw  new Error('File already exist!')
+                    }
+                    
+                    await userM.save()
+                    await fileM.save()
+                    await mv(`${path}\\${name}`) 
+                } catch (e) {
+                    throw e
+                }       
+            })
            
-            res.json({ msg: 'Files is uploaded!'})
-
+            res.json({ msg: 'All good'})
         } catch (e) {
             console.log('FileController upload files: ', e)
-            res.status(401).json({ msg: 'FileController upload files: ', e })
+            res.status(401).json({ msg: 'Error upload files: ', e })
         }
     }
 

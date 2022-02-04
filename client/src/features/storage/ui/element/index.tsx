@@ -52,17 +52,17 @@ export const Element: FC<IElement> = ({id, name, type, path, size}) => {
   
   return (
     <div className='element__container'>
-    <div onContextMenu={handleMenu} onClick={() => handleClick(id)} title={String(size)} className={classses}>
-      {
-          type === 'dir' 
-          ? <FolderIcon />  :
-            type === 'back' ? <BackIcon/>
-          : <FileIcon />
-      }
-      <div className="element__name">{name}</div>
-    </div>
-    
-    <ContextMenu isOpen={isOpenCM} fileId={id}/>
+      <div onContextMenu={handleMenu} onClick={() => handleClick(id)} title={String(size)} className={classses}>
+        {
+            type === 'dir' 
+            ? <FolderIcon />  :
+              type === 'back' ? <BackIcon/>
+            : <FileIcon />
+        }
+        <div className="element__name">{name}</div>
+      </div>
+      
+      <ContextMenu isOpen={isOpenCM} fileId={id}/>
     </div>
   )
 }
