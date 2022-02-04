@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react'
 import { connect, ConnectedProps, useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
+import { Link } from 'react-router-dom'
 import { ThunkDispatch } from 'redux-thunk'
 import { RootState } from '../../../../redux/store'
 import { Button } from '../../../../shared/button'
@@ -66,11 +67,10 @@ const Login: FC<{}> = () => {
                 click={handleLogin}
                 classes={['login__btn']}
             />
-             <Button
-                label="Sign Up"
-                route="/auth/registration"
-                classes={['signup__btn']}
-            />
+            <div className="login__link">
+                Don't have an account? 
+                <Link to="/auth/registration">Sign Up</Link>
+            </div>
         </>
     )
 }

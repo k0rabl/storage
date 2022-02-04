@@ -1,5 +1,6 @@
 import { FC, useState } from 'react'
 import { useNavigate } from 'react-router'
+import { Link } from 'react-router-dom'
 import { Button } from '../../../../shared/button'
 import { Input } from '../../../../shared/input'
 import { registrationPost } from '../../model/actions'
@@ -62,12 +63,11 @@ export const Registration: FC<{}> = () => {
                 click={handleReg}
                 classes={['login__btn']}
             />
-
-            <Button
-                label="Sign In"
-                route="/auth/login"
-                classes={['signin__btn']}
-            />
+            <div className="login__link">
+                Already have an account?
+                <Link to="/auth/login">Sign In</Link>
+            </div>
+            
         </>
     )
 }
