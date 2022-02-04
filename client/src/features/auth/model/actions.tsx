@@ -13,7 +13,6 @@ export const registrationPost = ({ email, password, name }: IParams) => {
             password,
             name,
         })
-        .then((data) => data.data.message)
         .catch((error) =>
             console.warn('Server error: ', error.response.data.msg)
         )

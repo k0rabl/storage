@@ -66,6 +66,11 @@ const Login: FC<{}> = () => {
                 click={handleLogin}
                 classes={['login__btn']}
             />
+             <Button
+                label="Sign Up"
+                route="/auth/registration"
+                classes={['signup__btn']}
+            />
         </>
     )
 }

@@ -1,10 +1,9 @@
-import { FunctionComponent, useState } from 'react'
+import { FC, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Button } from '../../../../shared/button'
 import { Input } from '../../../../shared/input'
 import { registrationPost } from '../../model/actions'
 
-interface IProps {}
 
 interface IParams {
     email: string
@@ -12,7 +11,9 @@ interface IParams {
     name: string
 }
 
-export const Registration: FunctionComponent<IProps> = () => {
+export const Registration: FC<{}> = () => {
+    const nav = useNavigate()
+
     const [params, setParams] = useState<IParams>({
         email: '',
         password: '',
@@ -28,6 +29,7 @@ export const Registration: FunctionComponent<IProps> = () => {
 
     const handleReg = () => {
         registrationPost(params)
+        nav('/auth/login')
     }
 
     return (
@@ -59,6 +61,12 @@ export const Registration: FunctionComponent<IProps> = () => {
                 label="Registration"
                 click={handleReg}
                 classes={['login__btn']}
+            />
+
+            <Button
+                label="Sign In"
+                route="/auth/login"
+                classes={['signin__btn']}
             />
         </>
     )

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import { authThunk } from '../features/auth/model/authMidleware'
@@ -12,12 +12,13 @@ import { RootState } from '../redux/store'
 
 
 const mapState = (state: RootState) => ({
+    activeUser: state.auth.activeUser,
     storage: state.storage
   })
 
-const App: FunctionComponent<{}> = () => {
+const App: FC<{}> = () => {
     const dispatch = useDispatch()
-    const {storage: {files}} = useSelector(mapState)
+    const {activeUser, storage: {files}} = useSelector(mapState)
 
     useEffect(() => {
         const token = localStorage.getItem('token')
@@ -29,7 +30,7 @@ const App: FunctionComponent<{}> = () => {
         <BrowserRouter>
             <ModalProvider>
                 <div className="App">
-                    <Header />
+                    {activeUser && <Header />}
                     <Routing />
                     <Modal />
                 </div>
