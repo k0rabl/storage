@@ -7,6 +7,7 @@ import { File } from '../../model/storageSlice'
 import { Element } from '../element'
 
 import './layout.sass'
+import CloudIcon from '../../../../shared/svg/cloud'
 
 
 const mapState = (state: RootState) => ({
@@ -22,7 +23,6 @@ export const Layout: FC<{}> = () => {
 
   useEffect(() => {    
     dispatch(getFilesThunk())
-
   }, [])
 
   const cancelDefault = (e: DragEvent<HTMLDivElement>) => {
@@ -31,20 +31,22 @@ export const Layout: FC<{}> = () => {
   }
 
   const handleDragEnter = (e: DragEvent<HTMLDivElement>) => {
-    handleDrop(e)
+    e.stopPropagation()
+    e.preventDefault()
 
     setDropZone(true)
   }
 
   const handleDragLeave = (e: DragEvent<HTMLDivElement>) => {
-    handleDrop(e)
+    e.stopPropagation()
+    e.preventDefault()
 
-    
     setDropZone(false)
   }
 
   const handleDrop = async (e: DragEvent<HTMLDivElement>) => {
-    handleDrop(e)
+    e.stopPropagation()
+    e.preventDefault()
 
     setDropZone(false)
 
@@ -69,7 +71,12 @@ export const Layout: FC<{}> = () => {
         onDragEnter={handleDragEnter}
         onDrop={handleDrop}
         onDragOver={cancelDefault}
-      />
+      >
+        <CloudIcon />
+        <h3>
+          Drop your Files here
+        </h3>
+      </div>
       {
         currentFolder &&
         <Element 
