@@ -1,5 +1,5 @@
 import { FC, useContext  } from 'react'
-import ModalContext from '../../model/context'
+import ModalContext from '../model/context'
 
 import './modal.sass'
 

@@ -7,7 +7,7 @@ import { Routing } from '../pages'
 import { ModalProvider } from '../features/modal/model/context'
 
 import './app.sass'
-import { Modal } from '../features/modal/ui/modal'
+import { Modal } from '../features/modal/ui'
 import { RootState } from '../redux/store'
 
 

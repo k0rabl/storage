@@ -1,12 +1,12 @@
 import { type } from 'os'
 import { FC, useContext, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../../../../redux/store'
-import { Button } from '../../../../../shared/button'
-import { Input } from '../../../../../shared/input'
-import ModalContext from '../../../../modal/model/context'
-import { createFolder } from '../../../model/actions'
-import { getFilesThunk } from '../../../model/storageMiddleware'
+import { RootState } from '../../../../redux/store'
+import { Button } from '../../../../shared/button'
+import { Input } from '../../../../shared/input'
+import ModalContext from '../../../modal/model/context'
+import { createFolder } from '../../../storage/model/actions'
+import { getFilesThunk } from '../../../storage/model/storageMiddleware'
 
 // import './addFileModal.sass'
 

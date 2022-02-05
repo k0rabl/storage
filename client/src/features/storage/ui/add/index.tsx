@@ -1,29 +1,28 @@
-import { FC, useContext, useState } from 'react'
+import { FC, useContext, useEffect, useState } from 'react'
 
 import AddFileIcon from '../../../../shared/svg/addFile'
 import AddFolderIcon from '../../../../shared/svg/addFolder'
 import PlusIcon from '../../../../shared/svg/plus'
 import ModalContext from '../../../modal/model/context'
-import { Modal } from '../../../modal/ui/modal'
+import { Modal } from '../../../modal/ui'
 
-import { AddFileModal } from '../modals/addFiles'
-import { AddFolderModal } from '../modals/addFolder'
+import { AddFileModal } from '../../../modal/ui/addFiles'
+import { AddFolderModal } from '../../../modal/ui/addFolder'
 
 
 import './add.sass'
 
 
 export const Add: FC<{}> = () => {
-  const context = useContext(ModalContext)
+  const { setOpen, setTitle } = useContext(ModalContext)
   const [modalType, setModalType] = useState<string>('')
 
   const handleShowModal = (type: string) => {
-    const { setOpen, setTitle } = context 
     
     setModalType(type)
     setTitle(type === 'addFolder' ? 'Create folder' : 'Upload files')
     setOpen(true)
-  }
+  }  
 
   return (
     <div className="add">
