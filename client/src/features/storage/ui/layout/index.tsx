@@ -22,7 +22,7 @@ export const Layout: FC<{}> = () => {
 
 
   useEffect(() => {    
-    dispatch(getFilesThunk())
+    dispatch(getFilesThunk())      
   }, [])
 
   const cancelDefault = (e: DragEvent<HTMLDivElement>) => {
@@ -89,10 +89,11 @@ export const Layout: FC<{}> = () => {
         />
       }
 
-      {files.filter(element =>  currentFolder 
+      {files
+        .filter(element =>  currentFolder 
           ? element.parent === currentFolder 
-          : !element.parent
-        ).map(({_id, name, type, path, size}: File) => 
+          : !element.parent)
+        .map(({_id, name, type, path, size}: File) => 
           <Element 
             key={_id}
             id={_id}
