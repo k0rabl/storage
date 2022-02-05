@@ -2,16 +2,16 @@ import React, { Component } from 'react'
 
 interface IState {
   isOpen: boolean
-  type: string
+  title: string
   hand: Function
 }
 
 const ModalContext = React.createContext({
     isOpen: false,
-    type: '',
+    title: '',
     setOpen: (c: boolean) => {},
-    setType: (c: string) => {},
     setHandler: (c: Function) => {},
+    setTitle: (c: string) => {},
     handler: () => {}
   })
 
@@ -20,7 +20,7 @@ class ModalProvider extends Component {
   // Context state
   state: IState = {
     isOpen: false,
-    type: '',
+    title: '',
     hand: () => {}
   }
  
@@ -30,8 +30,8 @@ class ModalProvider extends Component {
     this.setState((prevState) => ({ isOpen }))
   }
 
-  setType = (type: string) => {
-    this.setState((prevState) => ({ type }))
+  setTitle = (title: string) => {
+    this.setState((prevState) => ({ title }))
   }
   
 
@@ -46,16 +46,16 @@ class ModalProvider extends Component {
 
   render() {
     const { children } = this.props
-    const { isOpen, type } = this.state
-    const { setType, setOpen, setHandler, handler } = this
+    const { isOpen, title } = this.state
+    const { setOpen, setHandler, setTitle, handler } = this
 
     return (
       <ModalContext.Provider
         value={{
+          title,
+          setTitle,
           isOpen,
-          type,
           setOpen,
-          setType,
           setHandler,
           handler
         }}
