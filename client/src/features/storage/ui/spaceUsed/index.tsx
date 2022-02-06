@@ -47,7 +47,7 @@ export const SpaceUsed: FC<{}> = () => {
         </div>
       </div>
       <div className="spaceUsed__digits">
-        {usedSpace} / 10 Gb
+        {usedSpace}<small>GB of</small> 10<small>GB</small>
       </div>
 
     </div>

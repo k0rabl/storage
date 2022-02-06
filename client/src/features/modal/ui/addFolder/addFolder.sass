@@ -1,0 +1,28 @@
+.chooseColor
+  display: flex
+  justify-content: space-around
+  &__element
+    border-radius: 50%
+    height: 15px
+    width: 15px
+    background-color: #000
+    border: 3px solid transparent
+    cursor: pointer
+    box-sizing: content-box
+    &.black
+      background-color: #000
+    &.red
+      background-color: #a52222
+    &.green
+      background-color: #397c33
+    &.purple
+      background-color: #9b2191
+    &.yellow
+      background-color: #ebf838
+    &.pink
+      background-color: #ff00f2
+    &:hover
+      opacity: .8
+      border: 3px solid #0e6bab
+    &-choosen
+      border: 3px solid #0e6bab

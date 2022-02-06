@@ -39,9 +39,9 @@ export class FileController {
 
     async createDir(req, res) {
         try {
-            const { name, type, parent } = req.body
+            const { name, type, parent, color } = req.body
 
-            const file = new File({ name, type, user: req.user.id })
+            const file = new File({ name, type, color, user: req.user.id })
             const service = new FileServices()
 
             if (!parent.length) {

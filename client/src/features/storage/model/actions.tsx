@@ -4,14 +4,16 @@ interface IParams {
     name: string
     type: string
     parent: string
+    color: string
 }
 
-export const createFolder = async ({ name, type, parent }: IParams) => {
+export const createFolder = async ({ name, type, parent, color }: IParams) => {
     await instance
         .post('/file', {
             name,
             type,
             parent,
+            color
         }, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
