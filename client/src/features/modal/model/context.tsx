@@ -1,14 +1,17 @@
-import React, { Component } from 'react'
+import React, { Component, ReactElement } from 'react'
 
 interface IState {
   isOpen: boolean
   title: string
+  child: ReactElement
   hand: Function
 }
 
 const ModalContext = React.createContext({
     isOpen: false,
     title: '',
+    child: <div>Modal body</div>,
+    setChild: (c: ReactElement) => {},
     setOpen: (c: boolean) => {},
     setHandler: (c: Function) => {},
     setTitle: (c: string) => {},
@@ -21,6 +24,7 @@ class ModalProvider extends Component {
   state: IState = {
     isOpen: false,
     title: '',
+    child: <div>Modal body</div>,
     hand: () => {}
   }
  
@@ -32,6 +36,10 @@ class ModalProvider extends Component {
 
   setTitle = (title: string) => {
     this.setState((prevState) => ({ title }))
+  }
+
+  setChild = (child: ReactElement) => {
+    this.setState((prevState) => ({ child }))
   }
   
 
@@ -46,13 +54,15 @@ class ModalProvider extends Component {
 
   render() {
     const { children } = this.props
-    const { isOpen, title } = this.state
-    const { setOpen, setHandler, setTitle, handler } = this
+    const { isOpen, title, child} = this.state
+    const { setOpen, setHandler, setTitle, setChild, handler } = this
 
     return (
       <ModalContext.Provider
         value={{
           title,
+          child,
+          setChild,
           setTitle,
           isOpen,
           setOpen,

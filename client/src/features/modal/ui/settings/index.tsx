@@ -20,7 +20,7 @@ export const SettingsModal: FC<{}> = () => {
             Set Dark Theme
           </div>
           <div className="setting">
-            Set Folder Theme
+            Set Folder Themex x``
           </div>
         </p>
         <div className="modalC__buttons buttons">

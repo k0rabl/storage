@@ -33,6 +33,7 @@ const App: FC<{}> = () => {
                     {activeUser && <Header />}
                     <Routing />
                 </div>
+                <Modal />
             </ModalProvider>
         </BrowserRouter>
     )

@@ -3,7 +3,6 @@ import { FC, useContext, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { logOut } from '../../model/authSlice'
-import { Modal } from '../../../modal/ui'
 import ModalContext from '../../../modal/model/context'
 import { SettingsModal } from '../../../modal/ui/settings'
 import { ProfileModal } from '../../../modal/ui/profile'
@@ -16,11 +15,10 @@ import SettingsIcon from '../../../../shared/svg/settings'
 
 
 export const Profile: FC<{}> = () => {
-    const { setOpen, setTitle } = useContext(ModalContext)
+    const { setOpen, setTitle, setChild } = useContext(ModalContext)
     const dispatch = useDispatch()
     const nav = useNavigate()
     const [isOpenMenu, setOpenMenu] = useState<boolean>(false)
-    const [typeModal, setTypeModal] = useState<string>('')
 
     const handleOut = () => {
         dispatch(logOut())
@@ -33,8 +31,8 @@ export const Profile: FC<{}> = () => {
     }
 
     const handleModal = (type: string) => {
-        setTypeModal(type)
         setTitle(type === 'settings' ? 'Settings' : 'Profile')
+        setChild(type === 'settings' ? <SettingsModal /> : <ProfileModal />)
         setOpen(true)
     }
 
@@ -57,13 +55,6 @@ export const Profile: FC<{}> = () => {
                     <LogOutIcon />  
                 </div>
             </div>
-            <Modal>
-                {
-                    typeModal === 'settings'
-                        ? <SettingsModal />
-                        : <ProfileModal />
-                }   
-            </Modal>
         </div>
     )
 }
