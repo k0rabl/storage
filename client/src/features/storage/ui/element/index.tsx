@@ -23,11 +23,11 @@ interface IElement {
   id: string
   name: string
   type: string
-  path: string
+  color: string
   size: number
 }
 
-export const Element: FC<IElement> = ({id, name, type, path, size}) => {
+export const Element: FC<IElement> = ({id, name, type, color, size}) => {
   const dispatch = useDispatch()
   const [isOpenCM, setOpenCM] = useState<boolean>(false)
   const [icon, setIcon] = useState<ReactElement>()
@@ -36,7 +36,7 @@ export const Element: FC<IElement> = ({id, name, type, path, size}) => {
 
     switch (type) {
       case 'dir':
-        setIcon(<FolderIcon />)
+        setIcon(<FolderIcon fill={color} />)
         break       
       case 'back':
         setIcon(<BackIcon />)

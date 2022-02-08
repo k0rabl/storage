@@ -84,7 +84,7 @@ export const Layout: FC<{}> = () => {
           id={folder?.parent || ''}
           name='Back'
           type='back'
-          path=''
+          color='#000000'
           size={0}
         />
       }
@@ -93,13 +93,13 @@ export const Layout: FC<{}> = () => {
         .filter(element =>  currentFolder 
           ? element.parent === currentFolder 
           : !element.parent)
-        .map(({_id, name, type, path, size}: File) => 
+        .map(({_id, name, type, color, size}: File) => 
           <Element 
             key={_id}
             id={_id}
+            color={color}
             name={name}
             type={type}
-            path={path}
             size={size}
           />
         ) 

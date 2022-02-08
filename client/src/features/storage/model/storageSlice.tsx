@@ -4,7 +4,7 @@ export interface File {
     _id: string
     name: string
     type: string
-    path: string
+    color: string
     size: number
     parent?: string
     child: string[]

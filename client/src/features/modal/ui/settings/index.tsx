@@ -2,7 +2,7 @@ import { FC, useContext } from 'react'
 import { Button } from '../../../../shared/button'
 import ModalContext from '../../model/context'
 
-// import './addFileModal.sass'
+import './settings.sass'
 
 export const SettingsModal: FC<{}> = () => {
   const { setOpen } = useContext(ModalContext)
@@ -11,17 +11,16 @@ export const SettingsModal: FC<{}> = () => {
     setOpen(false)
   }
 
-
   return (
     <div className="addFiles">
         <p className="modalC__text">
-          <div className="setting">
-            <input type="radio" />
-            Set Dark Theme
-          </div>
-          <div className="setting">
-            Set Folder Themex x``
-          </div>
+        <input type="checkbox" id="toggle" className="toggle--checkbox" />
+        <label htmlFor="toggle" className="toggle--label">
+          <span className="toggle--label-background"></span>
+        </label>
+          {/* <div className="setting">
+            Set Folder Theme
+          </div> */}
         </p>
         <div className="modalC__buttons buttons">
             <Button 
