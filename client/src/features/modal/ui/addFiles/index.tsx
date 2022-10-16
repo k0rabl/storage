@@ -1,10 +1,10 @@
 import { ChangeEvent, FC, useContext, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../../../redux/store'
-import { Button } from '../../../../shared/button'
-import ModalContext from '../../model/context'
-import { uploadFile } from '../../../storage/model/actions'
-import { getFilesThunk } from '../../../storage/model/storageMiddleware'
+import { RootState } from '@store/store'
+import { Button } from '@shared/button'
+import ModalContext from '@features/modal/model/context'
+import { uploadFile } from '@features/storage/model/actions'
+import { getFilesThunk } from '@features/storage/model/storageMiddleware'
 
 // import './addFileModal.sass'
 

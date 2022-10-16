@@ -1,9 +1,9 @@
 import { FC, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
-import { Button } from '../../../../shared/button'
-import { Input } from '../../../../shared/input'
-import { registrationPost } from '../../model/actions'
+import { Button } from '@shared/button'
+import { Input } from '@shared/input'
+import { registrationPost } from '@features/auth/model/actions'
 
 
 interface IParams {

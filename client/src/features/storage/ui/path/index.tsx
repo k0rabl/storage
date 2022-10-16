@@ -1,7 +1,7 @@
 import { FC, useCallback, useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../../../redux/store'
-import { handleCurrFolder } from '../../model/storageSlice'
+import { RootState } from '@store/store'
+import { handleCurrFolder } from '@features/storage/model/storageSlice'
 
 import './path.sass'
 

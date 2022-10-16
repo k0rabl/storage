@@ -1,15 +1,14 @@
 import { FC } from 'react'
 import classNames from 'classnames'
+import { useDispatch } from 'react-redux'
 
 import { deleteFilePost, downloadFile } from '../../model/actions'
 import { deleteFile } from '../../model/storageSlice'
-import { useDispatch } from 'react-redux'
+
+import DeleteIcon from '@shared/svg/delete'
+import DownloadIcon from '@shared/svg/download'
 
 import './contextMenu.sass'
-
-import DeleteIcon from '../../../../shared/svg/delete'
-import DownloadIcon from '../../../../shared/svg/download'
-
 
 
 export const ContextMenu: FC<{isOpen: boolean, fileId: string}> = ({isOpen, fileId}) => {

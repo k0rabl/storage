@@ -1,7 +1,8 @@
 import { FC } from 'react'
 
+import SearchIcom from '@shared/svg/search'
+
 import './search.sass'
-import SearchIcom from '../../shared/svg/search'
 
 export const Search: FC<{}> = () => (
   <div className='search'>

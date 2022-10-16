@@ -1,23 +1,24 @@
 import classNames from 'classnames'
 import { FC, MouseEvent, useEffect, useState, DragEvent, ReactElement } from 'react'
 import { useDispatch } from 'react-redux'
+
 import { handleCurrFolder } from '../../model/storageSlice'
 import { ContextMenu } from '../contextMenu'
 import { downloadFile } from '../../model/actions'
 
 import './element.sass'
 
-import FileIcon from '../../../../shared/svg/fileTypes/file'
-import BackIcon from '../../../../shared/svg/fileTypes/back'
-import FolderIcon from '../../../../shared/svg/fileTypes/folder'
-import SVGIcon from '../../../../shared/svg/fileTypes/svg'
-import PngIcon from '../../../../shared/svg/fileTypes/png'
-import JpgIcon from '../../../../shared/svg/fileTypes/jpg'
-import ArchiveIcon from '../../../../shared/svg/fileTypes/archive'
-import ExeIcon from '../../../../shared/svg/fileTypes/exe'
-import HtmlIcon from '../../../../shared/svg/fileTypes/html'
-import GifIcon from '../../../../shared/svg/fileTypes/gif'
-import JsIcon from '../../../../shared/svg/fileTypes/js'
+import FileIcon from '@shared/svg/fileTypes/file'
+import BackIcon from '@shared/svg/fileTypes/back'
+import FolderIcon from '@shared/svg/fileTypes/folder'
+import SVGIcon from '@shared/svg/fileTypes/svg'
+import PngIcon from '@shared/svg/fileTypes/png'
+import JpgIcon from '@shared/svg/fileTypes/jpg'
+import ArchiveIcon from '@shared/svg/fileTypes/archive'
+import ExeIcon from '@shared/svg/fileTypes/exe'
+import HtmlIcon from '@shared/svg/fileTypes/html'
+import GifIcon from '@shared/svg/fileTypes/gif'
+import JsIcon from '@shared/svg/fileTypes/js'
 
 interface IElement {
   id: string

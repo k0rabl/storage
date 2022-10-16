@@ -1,13 +1,14 @@
 import { DragEvent, FC, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../../../redux/store'
-import { getFilesThunk } from '../../model/storageMiddleware'
-import { uploadFile } from '../../../storage/model/actions'
+import { RootState } from '@store/store'
+import { uploadFile } from '@features/storage/model/actions'
+
 import { File } from '../../model/storageSlice'
+import { getFilesThunk } from '../../model/storageMiddleware'
 import { Element } from '../element'
 
 import './layout.sass'
-import CloudIcon from '../../../../shared/svg/cloud'
+import CloudIcon from '@shared/svg/cloud'
 
 
 const mapState = (state: RootState) => ({

@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+      "baseUrl": "./src",
+      "paths": {
+        "@root": ["../"],
+        "@root/*": ["../*"],
+        
+        "@configs": ["./configs"],
+        "@configs/*": ["./configs/*"],
+        
+        "@app": ["./app"],
+        "@app/*": ["./app/*"],
+
+        "@features/": ["./features"],
+        "@features/*": ["./features/*"],
+
+        "@store": ["./redux"],
+        "@store/*": ["./redux/*"],
+
+        "@pages": ["./pages"],
+        "@pages/*": ["./pages/*"],
+        
+        "@shared": ["./shared"],
+        "@shared/*": ["./shared/*"]
+      }
+  }
+}

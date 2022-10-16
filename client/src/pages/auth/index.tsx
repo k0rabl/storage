@@ -1,7 +1,8 @@
 import { FC } from 'react'
 import { useLocation } from 'react-router'
-import Login from '../../features/auth/ui/login'
-import { Registration } from '../../features/auth/ui/registration'
+
+import Login from '@features/auth/ui/login'
+import { Registration } from '@features/auth/ui/registration'
 
 import './auth.sass'
 

@@ -1,12 +1,11 @@
 import { FC, useEffect, useState } from 'react'
-import { connect, ConnectedProps, useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
-import { ThunkDispatch } from 'redux-thunk'
-import { RootState } from '../../../../redux/store'
-import { Button } from '../../../../shared/button'
-import { Input } from '../../../../shared/input'
-import { loginThunk } from '../../model/authMidleware'
+import { RootState } from '@store/store'
+import { Button } from '@shared/button'
+import { Input } from '@shared/input'
+import { loginThunk } from '@features/auth/model/authMidleware'
 
 import './login.sass'
 

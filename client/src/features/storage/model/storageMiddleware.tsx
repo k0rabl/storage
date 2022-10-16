@@ -2,8 +2,8 @@ import { AnyAction, ThunkAction } from '@reduxjs/toolkit'
 
 import { getFiles } from './storageSlice'
 
-import { instance } from '../../../configs/axios'
-import { RootState } from '../../../redux/store'
+import { instance } from '@configs/axios'
+import { RootState } from '@store/store'
 
 export const getFilesThunk = (): ThunkAction<void, RootState, unknown, AnyAction> => async dispatch => {
   try {

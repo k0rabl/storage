@@ -2,8 +2,8 @@ import { AnyAction, ThunkAction } from '@reduxjs/toolkit'
 
 import { logIn } from './authSlice'
 
-import { instance } from '../../../configs/axios'
-import { RootState } from '../../../redux/store'
+import { instance } from '@configs/axios'
+import { RootState } from '@store/store'
 
 export const loginThunk =
     (

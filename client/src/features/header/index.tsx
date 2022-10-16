@@ -1,7 +1,7 @@
 import { FC } from 'react'
-import CloudIcon from '../../shared/svg/cloud'
-import { Profile } from '../auth/ui/profile'
-import { Search } from '../search'
+import CloudIcon from '@shared/svg/cloud'
+import { Profile } from '@features/auth/ui/profile'
+import { Search } from '@features/search'
 
 import './header.sass'
 

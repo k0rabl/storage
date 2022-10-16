@@ -1,4 +1,4 @@
-import { instance } from '../../../configs/axios'
+import { instance } from '@configs/axios'
 
 interface IParams {
     name: string

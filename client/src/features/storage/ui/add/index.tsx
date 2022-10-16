@@ -1,12 +1,12 @@
 import { FC, useContext, useEffect, useState } from 'react'
 
-import AddFileIcon from '../../../../shared/svg/addFile'
-import AddFolderIcon from '../../../../shared/svg/addFolder'
-import PlusIcon from '../../../../shared/svg/plus'
-import ModalContext from '../../../modal/model/context'
+import AddFileIcon from '@shared/svg/addFile'
+import AddFolderIcon from '@shared/svg/addFolder'
+import PlusIcon from '@shared/svg/plus'
+import ModalContext from '@features/modal/model/context'
 
-import { AddFileModal } from '../../../modal/ui/addFiles'
-import { AddFolderModal } from '../../../modal/ui/addFolder'
+import { AddFileModal } from '@features/modal/ui/addFiles'
+import { AddFolderModal } from '@features/modal/ui/addFolder'
 
 
 import './add.sass'

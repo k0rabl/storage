@@ -1,17 +1,18 @@
-import classNames from 'classnames'
 import { FC, useContext, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
-import { logOut } from '../../model/authSlice'
-import ModalContext from '../../../modal/model/context'
-import { SettingsModal } from '../../../modal/ui/settings'
-import { ProfileModal } from '../../../modal/ui/profile'
+import classNames from 'classnames'
 
+import { logOut } from '@features/auth/model/authSlice'
+import ModalContext from '@features/modal/model/context'
+import { SettingsModal } from '@features/modal/ui/settings'
+import { ProfileModal } from '@features/modal/ui/profile'
+
+import LogOutIcon from '@shared/svg/logOut'
+import AvatarIcon from '@shared/svg/avatar'
+import SettingsIcon from '@shared/svg/settings'
 
 import './loginBtns.sass'
-import LogOutIcon from '../../../../shared/svg/logOut'
-import AvatarIcon from '../../../../shared/svg/avatar'
-import SettingsIcon from '../../../../shared/svg/settings'
 
 
 export const Profile: FC<{}> = () => {

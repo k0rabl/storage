@@ -1,11 +1,13 @@
 import { FC, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
-import { Add } from '../../features/storage/ui/add'
-import { Layout } from '../../features/storage/ui/layout'
-import { Path } from '../../features/storage/ui/path'
-import { SpaceUsed } from '../../features/storage/ui/spaceUsed'
-import { RootState } from '../../redux/store'
+
+import { Add } from '@features/storage/ui/add'
+import { Layout } from '@features/storage/ui/layout'
+import { Path } from '@features/storage/ui/path'
+import { SpaceUsed } from '@features/storage/ui/spaceUsed'
+
+import { RootState } from '@store/store'
 
 import './storage.sass'
 

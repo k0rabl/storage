@@ -1,6 +1,6 @@
 import { FC, useContext } from 'react'
-import { Button } from '../../../../shared/button'
-import ModalContext from '../../model/context'
+import { Button } from '@shared/button'
+import ModalContext from '@features/modal/model/context'
 
 import './settings.sass'
 

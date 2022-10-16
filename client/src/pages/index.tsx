@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router'
-import { routes } from '../app/providers/routes'
+import { routes } from '@app/providers/routes'
 
 export const Routing = () => (
     <Routes>

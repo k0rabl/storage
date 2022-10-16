@@ -1,5 +1,5 @@
-import { Storage } from '../../pages/storage'
-import { Auth } from '../../pages/auth'
+import { Storage } from '@pages/storage'
+import { Auth } from '@pages/auth'
 import { RouteProps } from 'react-router'
 
 export const routes: Array<RouteProps> = [
