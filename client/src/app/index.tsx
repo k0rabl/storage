@@ -12,6 +12,7 @@ import { RootState } from '@store/store'
 import { Routing } from '@pages'
 
 import './app.sass'
+import Alert from '@features/alert/ui'
 
 
 const mapState = (state: RootState) => ({
@@ -33,6 +34,7 @@ const App: FC<{}> = () => {
         <BrowserRouter>
             <ModalProvider>
                 <div className="App">
+                    <Alert />
                     {activeUser && <Header />}
                     <Routing />
                 </div>
