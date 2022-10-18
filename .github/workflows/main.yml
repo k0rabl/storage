@@ -8,4 +8,4 @@ jobs:
     steps:
       - name: Build Front
         run: |
-          yarn install --silent
+          yarn
