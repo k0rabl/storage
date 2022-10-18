@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
 import { Button } from '@shared/button'
 import { Input } from '@shared/input'
-import { registrationPost } from '@features/auth/model/actions'
+import authService from '@features/auth/model/actions'
 
 
 interface IParams {
@@ -29,7 +29,7 @@ export const Registration: FC<{}> = () => {
     }
 
     const handleReg = () => {
-        registrationPost(params)
+        authService.registration(params.email, params.name, params.password)
         nav('/auth/login')
     }
 

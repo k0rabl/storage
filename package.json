@@ -1,81 +1,18 @@
 {
-    "name": "h0ld",
-    "version": "1.0.0",
-    "type": "module",
-    "scripts": {
-        "back:start": "node ./server/index.js",
-        "back:dev": "nodemon ./server/index.js",
-        "front:start": "craco start ./client",
-        "front:build": "craco build ./client",
-        "start": "yarn front:build && yarn back:start"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/k0rabl/storage.git"
-    },
-    "eslintConfig": {
-        "extends": [
-            "react-app",
-            "react-app/jest"
-        ]
-    },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
-    },
-    "author": "Danil Korabl <k0rab1@ya.ru>",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/k0rabl/storage/issues"
-    },
-    "homepage": "https://github.com/k0rabl/storage#readme",
-    "dependencies": {
-        "@craco/craco": "^6.4.5",
-        "@reduxjs/toolkit": "^1.7.1",
-        "axios": "^0.24.0",
-        "bcrypt": "^5.0.1",
-        "classnames": "^2.3.1",
-        "config": "^3.3.6",
-        "cors": "^2.8.5",
-        "express": "^4.17.2",
-        "express-fileupload": "^1.2.1",
-        "express-validator": "^6.14.0",
-        "jsonwebtoken": "^8.5.1",
-        "mongoose": "^6.1.2",
-        "node-fetch": "2.6.1",
-        "node-sass": "^7.0.1",
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2",
-        "react-redux": "^7.2.6",
-        "react-router": "^6.2.1",
-        "react-router-dom": "^6.2.1",
-        "react-scripts": "5.0.0",
-        "redux-thunk": "^2.4.1",
-        "redux-thunk-error-handler": "^1.1.4",
-        "web-vitals": "^2.1.2"
-    },
-    "devDependencies": {
-        "@testing-library/jest-dom": "^5.16.1",
-        "@testing-library/react": "^12.1.2",
-        "@testing-library/user-event": "^13.5.0",
-        "@types/express": "^4.17.13",
-        "@types/jest": "^27.0.3",
-        "@types/node": "^16.11.14",
-        "@types/node-fetch": "2.5.12",
-        "@types/react": "^17.0.37",
-        "@types/react-dom": "^17.0.11",
-        "@types/react-redux": "^7.1.20",
-        "@types/react-router": "^5.1.18",
-        "@types/react-router-dom": "^5.3.3",
-        "nodemon": "^2.0.15",
-        "typescript": "^4.5.4"
-    }
+  "name": "root",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:k0rabl/storage.git",
+  "author": "k0rabl <theevil228@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "lerna run --parallel start"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "lerna": "^6.0.1"
+  }
 }
