@@ -3,5 +3,5 @@
     "maxUserSpace": 10737418240,
     "dbConnect": "mongodb+srv://korabl:i6kOrab1@mycloud.c6sev.mongodb.net/cloud",
     "privateKey": "korabl-private-key",
-    "drivePath": "D:\\Work\\PetProjects\\storage\\server\\drive"
+    "drivePath": "/Users/danilkorabl/Study/Pet Projects/Storage/server/drive"
 }
