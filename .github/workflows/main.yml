@@ -13,3 +13,4 @@ jobs:
           heroku_app_name: "h0ld"
           heroku_email: "theevil228@gmail.com"
       - run: yarn
+
