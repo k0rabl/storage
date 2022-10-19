@@ -6,6 +6,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Build Front
-        run: |
-          yarn
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: 0e6cebd8-a80b-407d-b51a-7da9f36f4314
+          heroku_app_name: "h0ld"
+          heroku_email: "theevil228@gmail.com"
+      - run: yarn
+
