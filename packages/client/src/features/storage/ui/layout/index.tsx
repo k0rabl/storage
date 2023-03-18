@@ -24,6 +24,7 @@ export const Layout: FC<{}> = () => {
 
   useEffect(() => {    
     dispatch(getFilesThunk())      
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const cancelDefault = (e: DragEvent<HTMLDivElement>) => {

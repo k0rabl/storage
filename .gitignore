@@ -4,11 +4,12 @@
 /node_modules
 packages/*/node_modules
 
-yarn.lock
+/yarn.lock
 
 /.pnp
 .pnp.js
 /drive
+/.github
 
 # testing
 /coverage

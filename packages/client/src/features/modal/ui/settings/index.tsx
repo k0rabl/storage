@@ -32,7 +32,3 @@ export const SettingsModal: FC<{}> = () => {
     </div>
   )
 }
-
-function dispatch(arg0: any) {
-  throw new Error('Function not implemented.')
-}

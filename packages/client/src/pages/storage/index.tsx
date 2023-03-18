@@ -24,6 +24,7 @@ export const Storage: FC<IProps> = () => {
 
     useEffect(() => {
       if (!activeUser) nav('/auth/login')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

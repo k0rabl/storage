@@ -71,6 +71,7 @@ export const Element: FC<IElement> = ({id, name, type, color, size}) => {
         break
     }
   
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
 

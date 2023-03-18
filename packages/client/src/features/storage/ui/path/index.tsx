@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useMemo, useState } from 'react'
+import { FC, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@store/store'
 import { handleCurrFolder } from '@features/storage/model/storageSlice'
@@ -11,18 +11,18 @@ const mapState = (state: RootState) => ({
   storage: state.storage
 })
 
-interface Path {
+interface IPath {
   id: string
   name: string
 }
 
-export const Path: FC<{}> = () => {
+export const Path: FC = () => {
   const { activeUser, storage: {currentFolder, files} } = useSelector(mapState) 
   const dispatch = useDispatch()
-  const [path, setPath] = useState<Path[]>([])
+  const [path, setPath] = useState<IPath[]>([])
 
   useMemo(() => {
-    const pathArr: Path[] = []
+    const pathArr: IPath[] = []
 
     const getParents = (id: string) => {
       const file = files.find(el => el._id === id)
@@ -40,6 +40,7 @@ export const Path: FC<{}> = () => {
     
     setPath([...pathArr.reverse()])
     
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentFolder])
 
   const handleClick = (id: string) => {

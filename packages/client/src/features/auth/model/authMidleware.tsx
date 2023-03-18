@@ -3,7 +3,7 @@ import { logIn } from './authSlice'
 
 import { RootState } from '@store/store'
 import authService from './actions'
-import { AxiosError, AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios'
 
 export const loginThunk = (
         email: string,

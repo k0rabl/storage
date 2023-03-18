@@ -16,6 +16,7 @@ export const Modal:FC<{}> = (props) => {
     return () =>  {
       modalRot?.removeChild(el)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
  
   return createPortal((

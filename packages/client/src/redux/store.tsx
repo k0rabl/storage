@@ -1,4 +1,4 @@
-import { configureStore, applyMiddleware } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
 import createThunkErrorHandlerMiddleware from 'redux-thunk-error-handler'
 
 import authSlice from '@features/auth/model/authSlice'

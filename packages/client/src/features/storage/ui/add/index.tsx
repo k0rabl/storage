@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect, useState } from 'react'
+import { FC, useContext } from 'react'
 
 import AddFileIcon from '@shared/svg/addFile'
 import AddFolderIcon from '@shared/svg/addFolder'

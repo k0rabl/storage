@@ -40,7 +40,7 @@ const Login: FC<{}> = () => {
 
     useEffect(() => {
         if (activeUser) navigate('/storage')
-    }, [activeUser])
+    }, [activeUser, navigate])
 
     return (
         <>

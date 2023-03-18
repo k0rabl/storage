@@ -30,7 +30,7 @@ const Alert: FC = () => {
                 dispatch(clearAlert())
             }, 3000)
         }
-    }, [alert.value])
+    }, [dispatch, alert.value])
     
 
     return (
