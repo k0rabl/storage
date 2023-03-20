@@ -2,16 +2,12 @@ import { AnyAction, ThunkAction } from '@reduxjs/toolkit'
 
 import { getFiles } from './storageSlice'
 
-import { instance } from '@configs/axios'
 import { RootState } from '@store/store'
+import { getFilesService } from './actions'
 
 export const getFilesThunk = (): ThunkAction<void, RootState, unknown, AnyAction> => async dispatch => {
   try {
-    const res = await instance.get(`/file/get`, {
-      headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    })
+    const res = await getFilesService()
 
     const sortedFiles = res.data.sort((a: File, b: File) => {
       const nameA = a.name.toUpperCase()

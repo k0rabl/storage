@@ -12,6 +12,7 @@ module.exports = {
         "@features": path.resolve(__dirname, "./src/features"),
         "@store": path.resolve(__dirname, "./src/redux"),
         "@pages": path.resolve(__dirname, "./src/pages"),
+        "@utils": path.resolve(__dirname, "./src/utils"),
     },
   },
 };

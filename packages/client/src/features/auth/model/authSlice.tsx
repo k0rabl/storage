@@ -1,17 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
+interface IActiveUser {
+    id: string
+    name: string
+    email: string
+    files: []
+    diskSpace: number
+    usedSpace: number
+}
 export interface User {
-    activeUser?: {         
-        id: string
-        name: string
-        email: string
-        files: []
-        diskSpace: number
-        usedSpace: number
-    }
+    activeUser: IActiveUser
 }
 
-const initialState: User = {}
+const initialState: User = {
+    activeUser: {} as IActiveUser,
+}
 
 export const authSlice = createSlice({
     name: 'auth',
@@ -22,14 +25,12 @@ export const authSlice = createSlice({
             action: PayloadAction<{ token: string, user: User["activeUser"] }>
         ) => {
             state.activeUser = action.payload.user
-
-            localStorage.setItem('token', action.payload.token)
         },
         logOut: (state) => {
-            delete state.activeUser
+            state.activeUser = {} as IActiveUser
 
             localStorage.removeItem('token')
-        },
+        }
     },
 })
 

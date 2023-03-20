@@ -1,28 +1,21 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
-import { RootState } from '@store/store'
 import { Button } from '@shared/button'
 import { Input } from '@shared/input'
 import { loginThunk } from '@features/auth/model/authMidleware'
 
 import './login.sass'
+import { RootState } from '@store/store'
 
 interface IParams {
     email: string
     pass: string
 }
 
-const mapState = (state: RootState) => ({
-    activeUser: state.auth.activeUser,
-})
-
 const Login: FC<{}> = () => {
-    const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { activeUser } = useSelector(mapState)
-
+    const {isLoading, action} = useSelector((s: RootState) => s.loading)
     const [params, setParams] = useState<IParams>({ email: '', pass: '' })
 
     const getValues = (value: object) => {
@@ -38,14 +31,9 @@ const Login: FC<{}> = () => {
         dispatch(loginThunk(params.email, params.pass))
     }
 
-    useEffect(() => {
-        if (activeUser) navigate('/storage')
-    }, [activeUser, navigate])
-
     return (
         <>
             <img className="login__img" src="/label.png" alt="" />
-            <h2 className="login__title">Sign In</h2>
             <div className="login__inputs">
                 <Input
                     name="email"
@@ -53,8 +41,10 @@ const Login: FC<{}> = () => {
                     changeInput={getValues}
                     label="E-Mail"
                 />
+                
                 <Input
                     name="pass"
+
                     type="password"
                     changeInput={getValues}
                     label="Password"
@@ -65,6 +55,7 @@ const Login: FC<{}> = () => {
                 label="Log In"
                 click={handleLogin}
                 classes={['login__btn']}
+                isLoading={action === 'login' && isLoading}
             />
             <div className="login__link">
                 Don't have an account? 

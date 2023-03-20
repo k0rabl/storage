@@ -13,29 +13,30 @@ import { Routing } from '@pages'
 
 import './app.sass'
 import Alert from '@features/alert/ui'
+import { getToken } from '@utils/tokens'
 
 
-const mapState = (state: RootState) => ({
-    activeUser: state.auth.activeUser,
-    storage: state.storage
+const mapState = ({ auth }: RootState) => ({
+    activeUser: auth.activeUser,
   })
 
-const App: FC<{}> = () => {
+export const App: FC<{}> = () => {
     const dispatch = useDispatch()
-    const {activeUser, storage: {files}} = useSelector(mapState)
+    const {activeUser} = useSelector(mapState)
 
     useEffect(() => {
-        const token = localStorage.getItem('token')
+        const token = getToken()
         
-        if (token) dispatch(authThunk(token))
-    }, [dispatch, files])
+        if (token)
+             dispatch(authThunk(token))
+    }, [dispatch])
 
     return (
         <BrowserRouter>
             <ModalProvider>
                 <div className="App">
                     <Alert />
-                    {activeUser && <Header />}
+                    {activeUser?.id && <Header />}
                     <Routing />
                 </div>
                 <Modal />
@@ -43,4 +44,3 @@ const App: FC<{}> = () => {
         </BrowserRouter>
     )
 }
-export default App

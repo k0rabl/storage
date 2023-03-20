@@ -7,6 +7,15 @@ interface IParams {
     color: string
 }
 
+
+export const getFilesService = async () => {
+    return await instance.get(`/file/get`, {
+        headers: {
+            isToken: 'true',
+        },
+      })
+}
+
 export const createFolder = async ({ name, type, parent, color }: IParams) => {
     await instance
         .post('/file', {
@@ -16,7 +25,7 @@ export const createFolder = async ({ name, type, parent, color }: IParams) => {
             color
         }, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                isToken: 'true',
             }
         })
         .catch((error) =>
@@ -39,7 +48,7 @@ export const uploadFile = async (files: FileList | null | undefined, parent: str
     await instance
         .post('/file/upload', formData, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                isToken: 'true',
                 'Content-Type': 'multipart/form-data'
             }
         })
@@ -54,7 +63,7 @@ export const deleteFilePost = async (id: string) => {
             id
         }, {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                isToken: 'true',
             }
         })
 }
@@ -64,7 +73,7 @@ export const downloadFile = async (id: string) => {
     await instance
         .get('file/download', {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`
+                isToken: 'true'
             },
             params: {
                 fileId: id

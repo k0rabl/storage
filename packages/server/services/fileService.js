@@ -3,7 +3,7 @@ import config from 'config'
 
 export class FileServices {
     createDir(file) {
-        const filePath = `${config.get('drivePath')}\\${file.user}\\${file.path}`
+        const filePath = `${config.get('drivePath')}/${file.user}/${file.path}`
 
         return new Promise((resolve, reject) => {
             try {
@@ -23,7 +23,7 @@ export class FileServices {
     deleteFile(file) {
         return new Promise((resolve, reject) => {
             try {
-                const filePath = `${config.get('drivePath')}\\${file.user}\\${
+                const filePath = `${config.get('drivePath')}/${file.user}/${
                     file.path
                 }`
 

@@ -9,6 +9,7 @@ import { Element } from '../element'
 
 import './layout.sass'
 import CloudIcon from '@shared/svg/cloud'
+import { getToken } from '@utils/tokens'
 
 
 const mapState = (state: RootState) => ({
@@ -21,9 +22,10 @@ export const Layout: FC<{}> = () => {
   const [dropZone, setDropZone] = useState<boolean>(false)
   const dispatch = useDispatch()
 
-
-  useEffect(() => {    
-    dispatch(getFilesThunk())      
+  useEffect(() => {   
+    const token = getToken()
+    
+    token && dispatch(getFilesThunk())           
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

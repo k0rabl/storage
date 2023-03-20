@@ -21,7 +21,10 @@
         "@pages/*": ["./pages/*"],
         
         "@shared": ["./shared"],
-        "@shared/*": ["./shared/*"]
+        "@shared/*": ["./shared/*"],
+        
+        "@utils": ["./utils"],
+        "@utils/*": ["./utils/*"]
       }
   }
 }

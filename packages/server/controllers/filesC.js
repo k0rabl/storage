@@ -50,7 +50,7 @@ export class FileController {
                 const parentFile = await File.findOne({ _id: parent })
 
                 file.parent = parent
-                file.path = `${parentFile.path}\\${name}`
+                file.path = `${parentFile.path}/${name}`
 
                 parentFile.child.push(file._id)
                 await parentFile.save()

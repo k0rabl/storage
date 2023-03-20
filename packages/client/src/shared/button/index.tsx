@@ -9,14 +9,29 @@ interface IProps {
     click?: () => void
     classes: string[]
     route?: string
+    isLoading?: boolean
 }
 
-export const Button: FC<IProps> = ({ label, click, classes, route }) => (
+export const Button: FC<IProps> = ({ label, click, classes, route, isLoading }) => (
     <>
         {
             route 
-                ? <Link onClick={click} className={classNames(['btn', ...classes])} to={route}>{label}</Link> 
-                : <div onClick={click} className={classNames(['btn', ...classes])}>{label}</div>
+                ? <Link onClick={click} className={classNames(['btn', ...classes])} to={route}>
+                    { isLoading ? (
+                        <div className={'loader'}>
+                            <div className={'bubbleLoader'} />
+                        </div>
+                    ) : label }
+                  </Link> 
+                : <div onClick={click} className={classNames(['btn', ...classes])}>
+                    { isLoading ? (
+                        <div className={'loader'}>
+                            <div className={'bubbleLoader'} />
+                        </div>
+                    ) : label }
+                </div>
+
+
         }
     </>
 )

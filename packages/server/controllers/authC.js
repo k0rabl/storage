@@ -35,7 +35,20 @@ export const Registration = async (req, res) => {
         const service = new FileServices()
         await service.createDir(new File({ user: newUser._id, name: '' }))
 
-        return res.json({ message: 'User is create!' })
+        const token = jwt.sign({ id: newUser._id }, privateKey, { expiresIn: '1h' })
+
+        console.log(token);
+
+        return res.json({
+            token,
+            user: {
+                id: newUser._id,
+                email: email,
+                diskSpace: newUser.diskSpace,
+                usedSpace: newUser.usedSpace,
+                avatar: newUser.avatar,
+            },
+        })
     } catch (e) {
         console.log('Registration error: ', e)
         res.send({ message: 'Server error' })
@@ -78,9 +91,7 @@ export const Login = async (req, res) => {
 export const Auth = async (req, res) => {
     try {
         const user = await User.findOne({ _id: req.user.id })
-        const token = jwt.sign({ id: user.id }, config.get('privateKey'), {
-            expiresIn: '1h',
-        })
+        const token = jwt.sign({ id: user.id }, privateKey, { expiresIn: '1h' })
 
         return res.json({
             token,

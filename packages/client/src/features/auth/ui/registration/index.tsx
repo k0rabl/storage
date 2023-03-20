@@ -1,9 +1,10 @@
 import { FC, useState } from 'react'
-import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
 import { Button } from '@shared/button'
 import { Input } from '@shared/input'
-import authService from '@features/auth/model/actions'
+import { registrationThunk } from '@features/auth/model/authMidleware'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '@store/store'
 
 
 interface IParams {
@@ -13,8 +14,8 @@ interface IParams {
 }
 
 export const Registration: FC<{}> = () => {
-    const nav = useNavigate()
-
+    const dispatch = useDispatch()
+    const { isLoading, action } = useSelector((s: RootState) => s.loading)
     const [params, setParams] = useState<IParams>({
         email: '',
         password: '',
@@ -29,8 +30,7 @@ export const Registration: FC<{}> = () => {
     }
 
     const handleReg = () => {
-        authService.registration(params.email, params.name, params.password)
-        nav('/auth/login')
+        dispatch(registrationThunk(params.email, params.name, params.password))
     }
 
     return (
@@ -62,6 +62,7 @@ export const Registration: FC<{}> = () => {
                 label="Registration"
                 click={handleReg}
                 classes={['login__btn']}
+                isLoading={action === 'reg' && isLoading}
             />
             <div className="login__link">
                 Already have an account?
