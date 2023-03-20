@@ -4,8 +4,8 @@ const { Schema, model, ObjectId } = mongoose
 
 const File = new Schema({
     name: { type: String, required: true },
-    type: {type: String, required: true},
-    color: {type: String, default: '#000000'},
+    type: { type: String, required: true },
+    color: { type: String, default: '#000000' },
     access_link: { type: String },
     size: { type: Number, default: 0 },
     path: { type: String, default: '' },

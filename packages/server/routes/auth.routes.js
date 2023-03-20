@@ -1,6 +1,7 @@
 import { Router } from 'express'
-import { Registration, Login, Auth } from '../controllers/authC.js'
 import { check } from 'express-validator'
+
+import { Auth, Login, Registration } from '../controllers/authC.js'
 import { authMiddleware } from '../middleware/auth.middleware.js'
 
 const router = new Router()
@@ -12,7 +13,7 @@ router.post(
         check('password', 'Incorrect pass').isLength({ min: 5, max: 15 }),
         check('name').exists(),
     ],
-    Registration
+    Registration,
 )
 
 router.post('/login', Login)

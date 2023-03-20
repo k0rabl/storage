@@ -1,8 +1,10 @@
 .layout
   padding: 15px
-  display: grid
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr))
+  display: flex
+  flex-wrap: wrap
   position: relative
+  gap: 5px
+
   &__dropzone
     z-index: 0
     position: fixed
@@ -27,7 +29,7 @@
       
       border-radius: 50%
       box-sizing: border-box
-      background: #0e6bab
+      background: #0f76bb
       border: 1px solid transparent
       fill: #fff
     &-active

@@ -1,5 +1,5 @@
-import fs from 'fs'
 import config from 'config'
+import fs from 'fs'
 
 export class FileServices {
     createDir(file) {
@@ -23,9 +23,7 @@ export class FileServices {
     deleteFile(file) {
         return new Promise((resolve, reject) => {
             try {
-                const filePath = `${config.get('drivePath')}/${file.user}/${
-                    file.path
-                }`
+                const filePath = `${config.get('drivePath')}/${file.user}/${file.path}`
 
                 fs.rmdirSync(filePath, { recursive: true, force: true })
                 return resolve({ msg: 'File deleted succesfull!' })

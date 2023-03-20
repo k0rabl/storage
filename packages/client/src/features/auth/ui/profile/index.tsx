@@ -1,6 +1,5 @@
 import { FC, useContext, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router'
 import classNames from 'classnames'
 
 import { logOut } from '@features/auth/model/authSlice'
@@ -13,18 +12,18 @@ import AvatarIcon from '@shared/svg/avatar'
 import SettingsIcon from '@shared/svg/settings'
 
 import './loginBtns.sass'
+import { removeToken } from '@utils/tokens'
 
 
 export const Profile: FC<{}> = () => {
     const { setOpen, setTitle, setChild } = useContext(ModalContext)
     const dispatch = useDispatch()
-    const nav = useNavigate()
     const [isOpenMenu, setOpenMenu] = useState<boolean>(false)
 
     const handleOut = () => {
         dispatch(logOut())
 
-        nav('/auth/login')
+        removeToken()
     }
 
     const toggleMenu = () => {

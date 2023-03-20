@@ -36,7 +36,6 @@ export const Registration: FC<{}> = () => {
     return (
         <>
             <img className="login__img" src="/label.png" alt="" />
-            <h2 className="login__title">Sign Up</h2>
             <div className="login__inputs">
                 <Input
                     name="email"
@@ -45,16 +44,16 @@ export const Registration: FC<{}> = () => {
                     label="E-Mail"
                 />
                 <Input
-                    name="name"
-                    type="text"
-                    changeInput={getValues}
-                    label="Name"
-                />
-                <Input
                     name="password"
                     type="password"
                     changeInput={getValues}
                     label="Password"
+                />
+                <Input
+                    name="name"
+                    type="text"
+                    changeInput={getValues}
+                    label="Name"
                 />
             </div>
 

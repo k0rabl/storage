@@ -27,7 +27,6 @@ class ModalProvider extends Component {
     child: <div>Modal body</div>,
     hand: () => {}
   }
- 
 
   // Method to update state
   setOpen = (isOpen: boolean) => {
@@ -42,13 +41,11 @@ class ModalProvider extends Component {
     this.setState((prevState) => ({ child }))
   }
   
-
   setHandler = (hand: Function) => {
     this.setState((prevState) => ({ hand }))
   }
 
   handler = () => {
-    
     this.state.hand()
   }
 

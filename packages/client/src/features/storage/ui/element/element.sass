@@ -11,6 +11,8 @@
   &:hover, &-active
     background: rgba(14, 107, 171, .2)
     
+    svg
+      transform: scale(1.1)
   &:active
     transform: scale(.85)
   &__name
@@ -22,7 +24,6 @@
     text-overflow: ellipsis
   &__container
     position: relative
-    height: 150px
-
-
+  svg
+    transition: transform .2s
 

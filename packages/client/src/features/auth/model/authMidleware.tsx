@@ -45,6 +45,9 @@ export const authThunk =
             try {
                 const {data} = await authService.auth(token)
 
+                console.log(data.user);
+                
+
                 updateToken(data.token)
                 dispatch(logIn(data.user))
 

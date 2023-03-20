@@ -22,14 +22,12 @@ export const authSlice = createSlice({
     reducers: {
         logIn: (
             state,
-            action: PayloadAction<{ token: string, user: User["activeUser"] }>
+            action: PayloadAction<IActiveUser>
         ) => {
-            state.activeUser = action.payload.user
+            state.activeUser = action.payload
         },
         logOut: (state) => {
             state.activeUser = {} as IActiveUser
-
-            localStorage.removeItem('token')
         }
     },
 })

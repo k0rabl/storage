@@ -1818,7 +1818,7 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@craco/craco@^6.4.5":
+"@craco/craco@^6.4.3", "@craco/craco@^6.4.5":
   version "6.4.5"
   resolved "https://registry.yarnpkg.com/@craco/craco/-/craco-6.4.5.tgz#471e67082a2ffd3edf73759b215bdc16250d27b3"
   integrity sha512-8F2rIAao8sEh0FPP52ViEvDM9GjJ7acq0knu1c8UgI+EuZMD5/ZB270ol6jV4iNY7it9Umg/RoGBvNRUNr8U8w==
@@ -5181,6 +5181,13 @@ cosmiconfig@^7, cosmiconfig@^7.0.0, cosmiconfig@^7.0.1:
     parse-json "^5.0.0"
     path-type "^4.0.0"
     yaml "^1.10.0"
+
+craco-webpack-plugins@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/craco-webpack-plugins/-/craco-webpack-plugins-1.2.2.tgz#1f6e5c374a8f9d83a979ab8db2052d5d699dd86a"
+  integrity sha512-mGRIN0BCW/+2OrkessGqj6uL9xapTaqPknZTyG4HdeH/vwkPbCrPxWpOzcabikcF4t+BPr32FMMpbzjaenHdng==
+  dependencies:
+    "@craco/craco" "^6.4.3"
 
 create-require@^1.1.0:
   version "1.1.1"

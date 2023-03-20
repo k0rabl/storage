@@ -9,25 +9,24 @@ import { Element } from '../element'
 
 import './layout.sass'
 import CloudIcon from '@shared/svg/cloud'
-import { getToken } from '@utils/tokens'
 
 
 const mapState = (state: RootState) => ({
   storage: state.storage,
+  activeUser: state.auth.activeUser
 })
 
 export const Layout: FC<{}> = () => {
-  const { storage: {files, currentFolder} } = useSelector(mapState)  
+  const { storage: {files, currentFolder}, activeUser } = useSelector(mapState)  
   const [folder, setFolder] = useState<File>()
   const [dropZone, setDropZone] = useState<boolean>(false)
   const dispatch = useDispatch()
 
   useEffect(() => {   
-    const token = getToken()
     
-    token && dispatch(getFilesThunk())           
+    activeUser?.id && dispatch(getFilesThunk())           
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [activeUser])
 
   const cancelDefault = (e: DragEvent<HTMLDivElement>) => {
     e.stopPropagation()

@@ -98,6 +98,10 @@ export const Element: FC<IElement> = ({id, name, type, color, size}) => {
 
     console.log(e);    
   }
+
+  const handleOpen = (isOpen: boolean) => {
+    setOpenCM(isOpen)
+  }
   
 
   const classses = classNames([
@@ -116,7 +120,7 @@ export const Element: FC<IElement> = ({id, name, type, color, size}) => {
         <div className="element__name">{name}</div>
       </div>
       
-      <ContextMenu isOpen={isOpenCM} fileId={id}/>
+      <ContextMenu isOpen={isOpenCM} fileId={id} handleOpen={handleOpen}/>
     </div>
   )
 }
